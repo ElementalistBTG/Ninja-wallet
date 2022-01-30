@@ -30,9 +30,9 @@ class GetPortfolioCoinsDataUseCase @Inject constructor(
                         id = coinEntity.id,
                         name = coinEntity.name,
                         symbol = coinEntity.symbol,
-                        currentPrice = portfolioItems.bitcoin.usd,
-                        priceChange24hr = portfolioItems.bitcoin.usd_24h_change,
-                        marketCap = portfolioItems.bitcoin.usd_market_cap
+                        currentPrice = portfolioItems.coin.usd,
+                        priceChange24hr = portfolioItems.coin.usd_24h_change,
+                        marketCap = portfolioItems.coin.usd_market_cap
                     )
                 )
                 Log.d("mytag",portfolioItems.toString())
