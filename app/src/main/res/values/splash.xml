@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#202020 </item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_image</item>
+
+        <item name="windowSplashScreenIconBackgroundColor">#202000</item>
+
+  <!--      <item name="android:windowSplashScreenBrandingImage">@drawable/coingecko_text</item>  -->
+
+        <item name="postSplashScreenTheme">@style/Theme.CryptocurrencyApp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.accompanist:accompanist-flowlayout:0.17.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/eb675fa93dd48ccad569466348534f02/transformed/jetified-accompanist-flowlayout-0.17.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/90df972a7b69dddbe5dd62323db187ee/transformed/jetified-accompanist-flowlayout-0.17.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/90df972a7b69dddbe5dd62323db187ee/transformed/jetified-accompanist-flowlayout-0.17.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/90df972a7b69dddbe5dd62323db187ee/transformed/jetified-accompanist-flowlayout-0.17.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.accompanist/accompanist-flowlayout/0.17.0/e2211881fceddb9537cb9612681888cca02d75c/accompanist-flowlayout-0.17.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.accompanist/accompanist-flowlayout/0.17.0/ec22b236ce8aee3f85bd23b072f73a7578e7bc33/accompanist-flowlayout-0.17.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
