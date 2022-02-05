@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.compose.ui:ui-text:1.1.0-rc01@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/95e6ec98f8d8021706fc0a00d60a3402/transformed/jetified-ui-text-1.1.0-rc01/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/95e6ec98f8d8021706fc0a00d60a3402/transformed/jetified-ui-text-1.1.0-rc01/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/95e6ec98f8d8021706fc0a00d60a3402/transformed/jetified-ui-text-1.1.0-rc01/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/556d1ee67a83ace28af850c4c8e7f56d/transformed/jetified-ui-text-1.1.0-rc01/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/556d1ee67a83ace28af850c4c8e7f56d/transformed/jetified-ui-text-1.1.0-rc01/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/556d1ee67a83ace28af850c4c8e7f56d/transformed/jetified-ui-text-1.1.0-rc01/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
