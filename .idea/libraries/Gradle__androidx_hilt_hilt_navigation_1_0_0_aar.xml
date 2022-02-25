@@ -4,6 +4,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/64ea8cbf327615c18ba7b3909fffbfaa/transformed/jetified-hilt-navigation-1.0.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/64ea8cbf327615c18ba7b3909fffbfaa/transformed/jetified-hilt-navigation-1.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/64ea8cbf327615c18ba7b3909fffbfaa/transformed/jetified-hilt-navigation-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ff1a0b9302c1995533f270f06cdd9886/transformed/jetified-hilt-navigation-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ff1a0b9302c1995533f270f06cdd9886/transformed/jetified-hilt-navigation-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ff1a0b9302c1995533f270f06cdd9886/transformed/jetified-hilt-navigation-1.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

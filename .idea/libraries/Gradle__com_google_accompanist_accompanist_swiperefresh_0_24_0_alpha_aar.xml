@@ -5,6 +5,10 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1f31f7f7d5c650d2906ee62a713ea1b5/transformed/jetified-accompanist-swiperefresh-0.24.0-alpha/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1f31f7f7d5c650d2906ee62a713ea1b5/transformed/jetified-accompanist-swiperefresh-0.24.0-alpha/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1f31f7f7d5c650d2906ee62a713ea1b5/transformed/jetified-accompanist-swiperefresh-0.24.0-alpha/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5c5dae056a8b36478425d9978d52c0a4/transformed/jetified-accompanist-swiperefresh-0.24.0-alpha/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8662838c88264caccb69fd0528e749db/transformed/jetified-accompanist-swiperefresh-0.24.0-alpha/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8662838c88264caccb69fd0528e749db/transformed/jetified-accompanist-swiperefresh-0.24.0-alpha/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8662838c88264caccb69fd0528e749db/transformed/jetified-accompanist-swiperefresh-0.24.0-alpha/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.accompanist/accompanist-swiperefresh/0.24.0-alpha/1db71aa31b2cbe7fa16a1fcbd8e21c52ea2dde8d/accompanist-swiperefresh-0.24.0-alpha-javadoc.jar!/" />
