@@ -54,7 +54,7 @@ data class Low24h(
     val uah: Double,
     val usd: Double,
     val vef: Double,
-    val vnd: Int,
+    val vnd: Double,
     val xag: Double,
     val xau: Double,
     val xdr: Double,

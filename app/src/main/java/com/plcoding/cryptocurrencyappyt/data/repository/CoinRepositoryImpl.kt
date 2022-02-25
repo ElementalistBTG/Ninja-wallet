@@ -4,9 +4,7 @@ import com.plcoding.cryptocurrencyappyt.data.local.PortfolioDao
 import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
 import com.plcoding.cryptocurrencyappyt.data.remote.CoinGeckoApi
 import com.plcoding.cryptocurrencyappyt.data.remote.dto.CoinDetails.CoinDetailDTO
-import com.plcoding.cryptocurrencyappyt.data.remote.dto.CoinsList.CoinsDTO
 import com.plcoding.cryptocurrencyappyt.data.remote.dto.CoinsListMC.CoinListMCDTO
-import com.plcoding.cryptocurrencyappyt.data.remote.dto.PortfolioCoinDetails.PortfolioCoinsDTO
 import com.plcoding.cryptocurrencyappyt.domain.repository.CoinRepository
 import javax.inject.Inject
 
@@ -14,16 +12,9 @@ class CoinRepositoryImpl @Inject constructor(
     private val api: CoinGeckoApi,
     private val dao: PortfolioDao
 ) : CoinRepository {
-    override suspend fun getCoins(): List<CoinsDTO> {
-        return api.getCoins()
-    }
 
     override suspend fun getCoinById(coindId: String): CoinDetailDTO {
         return api.getCoinById(coindId)
-    }
-
-    override suspend fun getCoinsByMC(): CoinListMCDTO {
-        return api.getCoinsByMC()
     }
 
     override suspend fun getCoinsParams(
@@ -47,10 +38,20 @@ class CoinRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getPortfolioCoinData(
-        id: String,
-    ): PortfolioCoinsDTO {
-        return api.getPortfolioCoinParams(
-            id = id
+        ids: String,
+        currency: String,
+        order: String,
+        per_page: Int,
+        page: Int,
+        price_change_percentage: String
+    ): CoinListMCDTO {
+        return api.getCoinsParams(
+            ids = ids,
+            currency = currency,
+            order = order,
+            per_page = per_page,
+            page = page,
+            price_change_percentage = price_change_percentage
         )
     }
 

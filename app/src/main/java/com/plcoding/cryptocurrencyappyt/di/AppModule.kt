@@ -42,7 +42,7 @@ object AppModule {
     @Singleton
     fun providePortfolioDatabase(app: Application): PortfolioDatabase{
         return Room.databaseBuilder(
-            app, PortfolioDatabase::class.java,"portolio_db")
+            app, PortfolioDatabase::class.java,"portfolio_db")
             .build()
     }
 

@@ -24,7 +24,13 @@ class PortfolioViewModel @Inject constructor(
     }
 
     private fun getPortfolioCoins() {
-        getPortfolioCoinsDataUseCase().onEach { result ->
+        getPortfolioCoinsDataUseCase(
+            currency = "usd",
+            order = "market_cap_desc",
+            per_page = 250,
+            page = 1,
+            price_change_percentage = "1h,24h,7d"
+        ).onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     _state.value = PortfolioState(coins = result.data ?: emptyList())

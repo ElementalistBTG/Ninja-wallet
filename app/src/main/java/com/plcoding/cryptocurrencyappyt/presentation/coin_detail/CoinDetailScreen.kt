@@ -25,9 +25,7 @@ fun CoinDetailScreen(
     fun addCoinToPortfolio() {
         state.coin?.let {
             CoinsEntity(
-                id = it.id,
-                name = it.name,
-                symbol = it.symbol
+                id = it.id
             )
         }?.let { viewModel.addCoinToPorfolio(coin = it) }
     }

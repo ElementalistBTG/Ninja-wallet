@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CryptocurrencyAppYT.iml" filepath="$PROJECT_DIR$/.idea/modules/CryptocurrencyAppYT.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CryptocurrencyAppYT.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CryptocurrencyAppYT.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CryptocurrencyAppYT.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CryptocurrencyAppYT.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CryptocurrencyAppYT.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CryptocurrencyAppYT.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CryptocurrencyAppYT.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CryptocurrencyAppYT.app.unitTest.iml" />
     </modules>

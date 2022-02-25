@@ -6,7 +6,8 @@ import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
 
 @Database(
     entities = [CoinsEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 
 abstract class PortfolioDatabase: RoomDatabase(){

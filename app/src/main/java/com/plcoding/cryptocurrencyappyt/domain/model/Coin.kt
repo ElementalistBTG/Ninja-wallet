@@ -15,9 +15,7 @@ data class Coin(
 ){
     fun toCoinEntity() : CoinsEntity{
         return CoinsEntity(
-            id = id,
-            name = name,
-            symbol = symbol
+            id = id
         )
     }
 }
