@@ -107,4 +107,7 @@ dependencies {
 
     //serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+
+    //livedata to state needed dependency
+    implementation 'androidx.compose.runtime:runtime-livedata:1.2.0-alpha04'
 }

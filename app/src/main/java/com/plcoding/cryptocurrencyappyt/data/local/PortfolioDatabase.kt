@@ -11,6 +11,6 @@ import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
 )
 
 abstract class WatchlistDatabase: RoomDatabase(){
-    abstract val WatchlistDao : WatchlistDao
+    abstract val watchlistDao : WatchlistDao
 
 }

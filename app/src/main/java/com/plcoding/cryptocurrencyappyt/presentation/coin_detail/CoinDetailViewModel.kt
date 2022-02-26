@@ -2,14 +2,12 @@ package com.plcoding.cryptocurrencyappyt.presentation.coin_detail
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.plcoding.cryptocurrencyappyt.common.Constants
 import com.plcoding.cryptocurrencyappyt.common.Resource
 import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
-import com.plcoding.cryptocurrencyappyt.domain.model.Coin
 import com.plcoding.cryptocurrencyappyt.domain.use_case.add_coin_Watchlist.AddCoinWatchlistUseCase
+import com.plcoding.cryptocurrencyappyt.domain.use_case.check_coin_exists.CheckCoinExistsUseCase
 import com.plcoding.cryptocurrencyappyt.domain.use_case.get_coin.GetCoinUseCase
 import com.plcoding.cryptocurrencyappyt.domain.use_case.remove_coin_watchlist.RemoveCoinWatchlistUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +20,8 @@ import javax.inject.Inject
 class CoinDetailViewModel @Inject constructor(
     private val getCoinUseCase: GetCoinUseCase,
     private val addCoinWatchlistUseCase: AddCoinWatchlistUseCase,
-    private val removeCoinWatchListUseCase : RemoveCoinWatchlistUseCase,
+    private val removeCoinWatchListUseCase: RemoveCoinWatchlistUseCase,
+    private val checkCoinExistsUseCase: CheckCoinExistsUseCase,
     savedStateHandle: SavedStateHandle //use it to restore our app for process death for example/ also contains the navigation parameters
 ) : ViewModel() {
     //viewmodels maintain our state
@@ -31,15 +30,27 @@ class CoinDetailViewModel @Inject constructor(
     private val _state = mutableStateOf(CoinDetailState())
     val state: State<CoinDetailState> = _state
 
-    fun addCoinToWatchlist(coin: CoinsEntity){
+    private var _exists = MutableLiveData<Boolean>()
+    val exists: LiveData<Boolean>
+        get() = _exists
+
+    private fun checkCoinExists(coinId: String) {
         viewModelScope.launch {
-            addCoinWatchlistUseCase(coin)
+            _exists.value = checkCoinExistsUseCase(coinId)
         }
     }
 
-    fun removeCoinFromWatchlist(coin: CoinsEntity){
+    fun addCoinToWatchlist(coin: CoinsEntity) {
+        viewModelScope.launch {
+            addCoinWatchlistUseCase(coin)
+            _exists.value = true
+        }
+    }
+
+    fun removeCoinFromWatchlist(coin: CoinsEntity) {
         viewModelScope.launch {
             removeCoinWatchListUseCase(coin)
+            _exists.value = false
         }
     }
 
@@ -47,6 +58,7 @@ class CoinDetailViewModel @Inject constructor(
         savedStateHandle.get<String>(Constants.PARAM_COIN_ID)
             ?.let { coinId -> //check if it not equal to null
                 getCoin(coinId)
+                checkCoinExists(coinId)
             }
     }
 
@@ -66,7 +78,8 @@ class CoinDetailViewModel @Inject constructor(
                     _state.value = CoinDetailState(isLoading = true)
                 }
             }
-        }.launchIn(viewModelScope)// returns the flow that emits the resource values over time. We must launch it as a coroutine!
+        }
+            .launchIn(viewModelScope)// returns the flow that emits the resource values over time. We must launch it as a coroutine!
     }
 }
 

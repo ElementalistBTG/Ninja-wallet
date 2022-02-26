@@ -2,10 +2,11 @@ package com.plcoding.cryptocurrencyappyt.domain.repository
 
 import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
 import com.plcoding.cryptocurrencyappyt.data.remote.dto.CoinDetails.CoinDetailDTO
-import com.plcoding.cryptocurrencyappyt.data.remote.dto.CoinsList.CoinsDTO
 import com.plcoding.cryptocurrencyappyt.data.remote.dto.CoinsListMC.CoinListMCDTO
 
 interface CoinRepository {
+
+    suspend fun checkCoinExists(coindId: String): Boolean
 
     suspend fun getCoinById(coindId: String): CoinDetailDTO
 

@@ -13,6 +13,10 @@ class CoinRepositoryImpl @Inject constructor(
     private val dao: WatchlistDao
 ) : CoinRepository {
 
+    override suspend fun checkCoinExists(coindId: String): Boolean {
+        return dao.exists(coindId)
+    }
+
     override suspend fun getCoinById(coindId: String): CoinDetailDTO {
         return api.getCoinById(coindId)
     }

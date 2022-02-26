@@ -35,7 +35,7 @@ object AppModule {
         api: CoinGeckoApi,
         db: WatchlistDatabase
     ) : CoinRepository{
-        return CoinRepositoryImpl(api,db.WatchlistDao) //uses the above function!!!!!
+        return CoinRepositoryImpl(api,db.watchlistDao) //uses the above function!!!!!
     }
 
     @Provides

@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,10 +26,10 @@ fun CoinDetailScreen(
     viewModel: CoinDetailViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    var addedCoinToWatchlist by remember { mutableStateOf(false) }
+
+    val coinExistsInWatchlist = viewModel.exists.observeAsState()
 
     val addCoinToWatchlist = {
-        addedCoinToWatchlist = !addedCoinToWatchlist
         state.coin?.let {
             CoinsEntity(
                 id = it.id
@@ -37,12 +38,11 @@ fun CoinDetailScreen(
     }
 
     val removeCoinFromWatchlist = {
-        addedCoinToWatchlist = !addedCoinToWatchlist
         state.coin?.let {
             CoinsEntity(
                 id = it.id
             )
-        }?.let { viewModel.addCoinToWatchlist(coin = it) }
+        }?.let { viewModel.removeCoinFromWatchlist(coin = it) }
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -76,7 +76,7 @@ fun CoinDetailScreen(
                             .fillMaxWidth()
                             .padding(10.dp)
                     )
-                    if (addedCoinToWatchlist) {
+                    if (coinExistsInWatchlist.value != true) {
                         ExtendedFloatingActionButton(
                             text = { Text(text = "Add to Watchlist") },
                             onClick = { addCoinToWatchlist() },
