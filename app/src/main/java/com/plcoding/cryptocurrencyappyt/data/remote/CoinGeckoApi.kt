@@ -29,7 +29,7 @@ interface CoinGeckoApi {
         @Query("price_change_percentage") price_change_percentage: String,
         //Include price change percentage in 1h, 24h, 7d, 14d, 30d, 200d, 1y (eg. '1h,24h,7d' comma-separated
         @Query("ids") ids: String = ""
-        //ids to be added when retrieving portfolio coins
+        //ids to be added when retrieving Watchlist coins
     ): CoinListMCDTO
 
 

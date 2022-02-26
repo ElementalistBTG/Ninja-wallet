@@ -10,7 +10,7 @@ import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
     exportSchema = false
 )
 
-abstract class PortfolioDatabase: RoomDatabase(){
-    abstract val portfolioDao : PortfolioDao
+abstract class WatchlistDatabase: RoomDatabase(){
+    abstract val WatchlistDao : WatchlistDao
 
 }

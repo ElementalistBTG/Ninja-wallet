@@ -8,8 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.plcoding.cryptocurrencyappyt.common.Constants
 import com.plcoding.cryptocurrencyappyt.common.Resource
 import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
-import com.plcoding.cryptocurrencyappyt.domain.use_case.add_coin_portfolio.AddCoinPortfolioUseCase
+import com.plcoding.cryptocurrencyappyt.domain.model.Coin
+import com.plcoding.cryptocurrencyappyt.domain.use_case.add_coin_Watchlist.AddCoinWatchlistUseCase
 import com.plcoding.cryptocurrencyappyt.domain.use_case.get_coin.GetCoinUseCase
+import com.plcoding.cryptocurrencyappyt.domain.use_case.remove_coin_watchlist.RemoveCoinWatchlistUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -19,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CoinDetailViewModel @Inject constructor(
     private val getCoinUseCase: GetCoinUseCase,
-    private val addCoinPortfolioUseCase: AddCoinPortfolioUseCase,
+    private val addCoinWatchlistUseCase: AddCoinWatchlistUseCase,
+    private val removeCoinWatchListUseCase : RemoveCoinWatchlistUseCase,
     savedStateHandle: SavedStateHandle //use it to restore our app for process death for example/ also contains the navigation parameters
 ) : ViewModel() {
     //viewmodels maintain our state
@@ -28,9 +31,15 @@ class CoinDetailViewModel @Inject constructor(
     private val _state = mutableStateOf(CoinDetailState())
     val state: State<CoinDetailState> = _state
 
-    fun addCoinToPorfolio(coin: CoinsEntity){
+    fun addCoinToWatchlist(coin: CoinsEntity){
         viewModelScope.launch {
-            addCoinPortfolioUseCase(coin)
+            addCoinWatchlistUseCase(coin)
+        }
+    }
+
+    fun removeCoinFromWatchlist(coin: CoinsEntity){
+        viewModelScope.launch {
+            removeCoinWatchListUseCase(coin)
         }
     }
 

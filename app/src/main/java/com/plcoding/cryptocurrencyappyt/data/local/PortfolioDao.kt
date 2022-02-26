@@ -4,14 +4,14 @@ import androidx.room.*
 import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
 
 @Dao
-interface PortfolioDao {
+interface WatchlistDao {
 
     @Query("SELECT * FROM CoinsEntity")
-    suspend fun getPortfolioCoins(): List<CoinsEntity>
+    suspend fun getWatchlistCoins(): List<CoinsEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCoinToPortfolio(coin:CoinsEntity)
+    suspend fun insertCoinToWatchlist(coin:CoinsEntity)
 
     @Delete
-    suspend fun deleteCoinFromPortfolio(coin: CoinsEntity)
+    suspend fun deleteCoinFromWatchlist(coin: CoinsEntity)
 }

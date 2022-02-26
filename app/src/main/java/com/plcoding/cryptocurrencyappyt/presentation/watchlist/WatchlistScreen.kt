@@ -1,4 +1,4 @@
-package com.plcoding.cryptocurrencyappyt.presentation.portfolio
+package com.plcoding.cryptocurrencyappyt.presentation.Watchlist
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,33 +14,44 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.plcoding.cryptocurrencyappyt.presentation.Screen
 import com.plcoding.cryptocurrencyappyt.presentation.coin_detail.components.CoinListItem
 import com.plcoding.cryptocurrencyappyt.presentation.coin_detail.components.HeadersLine
 
 @Composable
-fun PortfolioScreen(
+fun WatchlistScreen(
     navController: NavController,
-    viewModel: PortfolioViewModel = hiltViewModel()
+    viewModel: WatchlistViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
+    val emptyList = viewModel.emptyList
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
             HeadersLine()
             Divider(Modifier.padding(6.dp), color = Color.LightGray)
-            LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                items(state.coins) { coin ->
-                    CoinListItem(
-                        coin = coin,
-                        onItemClick = {
-                            navController.navigate(Screen.CoinDetailScreen.route + "/${coin.id}")
-                        }
-                    )
-                    Divider(Modifier.padding(3.dp), color = Color.Green)
+            if(!emptyList.value){
+                LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                    items(state.coins) { coin ->
+                        CoinListItem(
+                            coin = coin,
+                            onItemClick = {
+                                navController.navigate(Screen.CoinDetailScreen.route + "/${coin.id}")
+                            }
+                        )
+                        Divider(Modifier.padding(3.dp), color = Color.Green)
+                    }
                 }
+            }else{
+                Text(
+                    modifier = Modifier.fillMaxSize(),
+                    text = "Add coins to your watchlist to display here"
+                )
             }
+            
+            
         }
 
         if (state.error.isNotBlank()) {//if it contains an error

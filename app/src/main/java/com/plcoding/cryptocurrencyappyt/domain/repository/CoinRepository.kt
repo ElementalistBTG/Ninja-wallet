@@ -17,9 +17,9 @@ interface CoinRepository {
         price_change_percentage: String
     ): CoinListMCDTO
 
-    suspend fun getPortfolioCoinsFromDB(): List<CoinsEntity>
+    suspend fun getWatchlistCoinsFromDB(): List<CoinsEntity>
 
-    suspend fun getPortfolioCoinData(
+    suspend fun getWatchlistCoinData(
         ids: String,
         currency: String,
         order: String,
@@ -28,7 +28,7 @@ interface CoinRepository {
         price_change_percentage: String
     ): CoinListMCDTO
 
-    suspend fun addNewCoinToPortfolio(coin: CoinsEntity)
+    suspend fun addNewCoinToWatchlist(coin: CoinsEntity)
 
-    suspend fun deleteCoinFromPortfolio(coin: CoinsEntity)
+    suspend fun deleteCoinFromWatchlist(coin: CoinsEntity)
 }

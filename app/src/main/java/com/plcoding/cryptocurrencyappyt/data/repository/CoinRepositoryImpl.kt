@@ -1,6 +1,6 @@
 package com.plcoding.cryptocurrencyappyt.data.repository
 
-import com.plcoding.cryptocurrencyappyt.data.local.PortfolioDao
+import com.plcoding.cryptocurrencyappyt.data.local.WatchlistDao
 import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
 import com.plcoding.cryptocurrencyappyt.data.remote.CoinGeckoApi
 import com.plcoding.cryptocurrencyappyt.data.remote.dto.CoinDetails.CoinDetailDTO
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class CoinRepositoryImpl @Inject constructor(
     private val api: CoinGeckoApi,
-    private val dao: PortfolioDao
+    private val dao: WatchlistDao
 ) : CoinRepository {
 
     override suspend fun getCoinById(coindId: String): CoinDetailDTO {
@@ -33,11 +33,11 @@ class CoinRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getPortfolioCoinsFromDB(): List<CoinsEntity> {
-        return dao.getPortfolioCoins()
+    override suspend fun getWatchlistCoinsFromDB(): List<CoinsEntity> {
+        return dao.getWatchlistCoins()
     }
 
-    override suspend fun getPortfolioCoinData(
+    override suspend fun getWatchlistCoinData(
         ids: String,
         currency: String,
         order: String,
@@ -55,12 +55,12 @@ class CoinRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun addNewCoinToPortfolio(coin: CoinsEntity) {
-        return dao.insertCoinToPortfolio(coin)
+    override suspend fun addNewCoinToWatchlist(coin: CoinsEntity) {
+        return dao.insertCoinToWatchlist(coin)
     }
 
-    override suspend fun deleteCoinFromPortfolio(coin: CoinsEntity) {
-        return dao.deleteCoinFromPortfolio(coin)
+    override suspend fun deleteCoinFromWatchlist(coin: CoinsEntity) {
+        return dao.deleteCoinFromWatchlist(coin)
     }
 
 

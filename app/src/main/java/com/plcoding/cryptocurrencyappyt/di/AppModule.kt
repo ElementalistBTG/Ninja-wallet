@@ -3,7 +3,7 @@ package com.plcoding.cryptocurrencyappyt.di
 import android.app.Application
 import androidx.room.Room
 import com.plcoding.cryptocurrencyappyt.common.Constants
-import com.plcoding.cryptocurrencyappyt.data.local.PortfolioDatabase
+import com.plcoding.cryptocurrencyappyt.data.local.WatchlistDatabase
 import com.plcoding.cryptocurrencyappyt.data.remote.CoinGeckoApi
 import com.plcoding.cryptocurrencyappyt.data.repository.CoinRepositoryImpl
 import com.plcoding.cryptocurrencyappyt.domain.repository.CoinRepository
@@ -33,16 +33,16 @@ object AppModule {
     @Singleton
     fun provideCoinRepository(
         api: CoinGeckoApi,
-        db: PortfolioDatabase
+        db: WatchlistDatabase
     ) : CoinRepository{
-        return CoinRepositoryImpl(api,db.portfolioDao) //uses the above function!!!!!
+        return CoinRepositoryImpl(api,db.WatchlistDao) //uses the above function!!!!!
     }
 
     @Provides
     @Singleton
-    fun providePortfolioDatabase(app: Application): PortfolioDatabase{
+    fun provideWatchlistDatabase(app: Application): WatchlistDatabase{
         return Room.databaseBuilder(
-            app, PortfolioDatabase::class.java,"portfolio_db")
+            app, WatchlistDatabase::class.java,"Watchlist_db")
             .build()
     }
 

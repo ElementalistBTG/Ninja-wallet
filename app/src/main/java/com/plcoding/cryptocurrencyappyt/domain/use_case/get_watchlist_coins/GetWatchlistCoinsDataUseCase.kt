@@ -1,4 +1,4 @@
-package com.plcoding.cryptocurrencyappyt.domain.use_case.get_porfolio_coins
+package com.plcoding.cryptocurrencyappyt.domain.use_case.get_watchlist_coins
 
 
 import android.util.Log
@@ -12,7 +12,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetPortfolioCoinsDataUseCase @Inject constructor(
+class GetWatchlistCoinsDataUseCase @Inject constructor(
     private val repository: CoinRepository
 ) {
     //overwrite the invoke/execute fun -> So we can use the use case as it was a function
@@ -27,24 +27,30 @@ class GetPortfolioCoinsDataUseCase @Inject constructor(
             //we first emit a loading status
             emit(Resource.Loading<List<Coin>>())
 
-            val coinEntities = repository.getPortfolioCoinsFromDB()
-            var coinIds = coinEntities.first().id
-            for (coinEntity in coinEntities) {
-                if(coinEntity!=coinEntities.first()){
-                    coinIds += ",${coinEntity.id}"
+            val coinEntities = repository.getWatchlistCoinsFromDB()
+            var coinIds = ""
+            if(coinEntities.isNotEmpty()){
+                coinIds = coinEntities.first().id
+                for (coinEntity in coinEntities) {
+                    if(coinEntity!=coinEntities.first()){
+                        coinIds += ",${coinEntity.id}"
+                    }
                 }
-            }
-            val portfolioItems = repository.getPortfolioCoinData(
-                ids = coinIds,
-                currency = currency,
-                order = order,
-                per_page = per_page,
-                page = page,
-                price_change_percentage = price_change_percentage
-            ).map { it.toCoins() }
+                val watchlistItems = repository.getWatchlistCoinData(
+                    ids = coinIds,
+                    currency = currency,
+                    order = order,
+                    per_page = per_page,
+                    page = page,
+                    price_change_percentage = price_change_percentage
+                ).map { it.toCoins() }
 
-            //if the above line is successful we can emit the Resource.Success to our viewmodel
-            emit(Resource.Success<List<Coin>>(portfolioItems))
+                //if the above line is successful we can emit the Resource.Success to our viewmodel
+                emit(Resource.Success<List<Coin>>(watchlistItems))
+            }else{
+                emit(Resource.Success<List<Coin>>(listOf<Coin>()))
+            }
+
         } catch (e: HttpException) {
             //if we get an http response code that doesn't start with a 2XX
             Log.d("mytag", e.localizedMessage)

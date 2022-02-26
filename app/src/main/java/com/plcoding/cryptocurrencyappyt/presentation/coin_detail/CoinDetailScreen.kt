@@ -4,30 +4,45 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.plcoding.cryptocurrencyappyt.common.useful.ExpandingText
 import com.plcoding.cryptocurrencyappyt.data.local.entity.CoinsEntity
 import com.plcoding.cryptocurrencyappyt.presentation.coin_detail.components.LinksListItem
 
+@Preview
 @Composable
 fun CoinDetailScreen(
 //nav controller is not needed since we don't navigate to anywhere through this screen
     viewModel: CoinDetailViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    fun addCoinToPortfolio() {
+    var addedCoinToWatchlist by remember { mutableStateOf(false) }
+
+    val addCoinToWatchlist = {
+        addedCoinToWatchlist = !addedCoinToWatchlist
         state.coin?.let {
             CoinsEntity(
                 id = it.id
             )
-        }?.let { viewModel.addCoinToPorfolio(coin = it) }
+        }?.let { viewModel.addCoinToWatchlist(coin = it) }
+    }
+
+    val removeCoinFromWatchlist = {
+        addedCoinToWatchlist = !addedCoinToWatchlist
+        state.coin?.let {
+            CoinsEntity(
+                id = it.id
+            )
+        }?.let { viewModel.addCoinToWatchlist(coin = it) }
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -61,11 +76,21 @@ fun CoinDetailScreen(
                             .fillMaxWidth()
                             .padding(10.dp)
                     )
-                    ExtendedFloatingActionButton(
-                        text = { Text(text = "Add to Portfolio") },
-                        onClick = { addCoinToPortfolio() },
-                        icon = { Icon(Icons.Filled.Favorite, "Portfolio Coin") }
-                    )
+                    if (addedCoinToWatchlist) {
+                        ExtendedFloatingActionButton(
+                            text = { Text(text = "Add to Watchlist") },
+                            onClick = { addCoinToWatchlist() },
+                            icon = { Icon(Icons.Filled.Favorite, "Add to Watchlist") }
+                        )
+                    } else {
+                        ExtendedFloatingActionButton(
+                            text = { Text(text = "Remove from Watchlist") },
+                            onClick = { removeCoinFromWatchlist() },
+                            icon = { Icon(Icons.Filled.Close, "Remove from Watchlist") },
+                            backgroundColor = Color.DarkGray
+                        )
+                    }
+
                 }
             }
         }

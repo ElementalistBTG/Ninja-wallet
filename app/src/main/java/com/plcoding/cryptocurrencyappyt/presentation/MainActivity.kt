@@ -30,7 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import com.plcoding.cryptocurrencyappyt.presentation.coin_detail.CoinDetailScreen
 import com.plcoding.cryptocurrencyappyt.presentation.coin_list.CoinListScreen
 import com.plcoding.cryptocurrencyappyt.presentation.coin_list.CoinListViewModel
-import com.plcoding.cryptocurrencyappyt.presentation.portfolio.PortfolioScreen
+import com.plcoding.cryptocurrencyappyt.presentation.Watchlist.WatchlistScreen
 import com.plcoding.cryptocurrencyappyt.presentation.settings.SettingsScreen
 import com.plcoding.cryptocurrencyappyt.ui.theme.CryptocurrencyAppYTTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -135,7 +135,7 @@ fun AppTopBar(navController: NavController) {
 fun BottomNavigation(navController: NavController) {
     val items = listOf(
         Screen.CoinListScreen,
-        Screen.PortfolioScreen
+        Screen.WatchlistScreen
     )
     BottomNavigation(
         backgroundColor = Color.DarkGray,
@@ -186,9 +186,9 @@ fun NavigationGraph(navController: NavHostController) {
             CoinDetailScreen()
         }
         composable(
-            route = Screen.PortfolioScreen.route
+            route = Screen.WatchlistScreen.route
         ) {
-            PortfolioScreen(navController)
+            WatchlistScreen(navController)
         }
         composable(
             route = Screen.SettingsScreen.route
