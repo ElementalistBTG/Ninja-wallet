@@ -1,10 +1,8 @@
 package com.plcoding.cryptocurrencyappyt.presentation.settings
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
-import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -41,71 +39,8 @@ fun SettingsScreen(
             text = "Display price change percentage in units:",
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
-        DisplayRadioGroup()
-
-    }
-
-}
-
-@Composable
-fun DisplayRadioGroup() {
-    var selected by remember { mutableStateOf("1hr") }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentWidth(
-                unbounded = false
-            )
-            .padding(10.dp)
-    ) {
-        Column() {
-            Text(
-                text = "1hr",
-                modifier = Modifier
-                    .clickable(onClick = { selected = "1hr" })
-            )
-            RadioButton(selected = selected == "1hr", onClick = { selected = "1hr" })
-        }
-        Spacer(modifier = Modifier.size(4.dp))
-
-        Column() {
-            Text(
-                text = "24hr",
-                modifier = Modifier
-                    .clickable(onClick = { selected = "24hr" })
-            )
-            RadioButton(selected = selected == "24hr", onClick = { selected = "24hr" })
-        }
-        Spacer(modifier = Modifier.size(4.dp))
-
-        Column() {
-            Text(
-                text = "7d",
-                modifier = Modifier
-                    .clickable(onClick = { selected = "7d" })
-            )
-            RadioButton(selected = selected == "7d", onClick = { selected = "7d" })
-        }
-        Spacer(modifier = Modifier.size(4.dp))
-
-        Column() {
-            Text(
-                text = "14d",
-                modifier = Modifier
-                    .clickable(onClick = { selected = "14d" })
-            )
-            RadioButton(selected = selected == "14d", onClick = { selected = "14d" })
-        }
-        Spacer(modifier = Modifier.size(4.dp))
-
-        Column() {
-            Text(
-                text = "30d",
-                modifier = Modifier
-                    .clickable(onClick = { selected = "30d" })
-            )
-            RadioButton(selected = selected == "30d", onClick = { selected = "30d" })
-        }
-
+        PriceChangePercentageRadioGroup(viewModel)
     }
 }
+
+

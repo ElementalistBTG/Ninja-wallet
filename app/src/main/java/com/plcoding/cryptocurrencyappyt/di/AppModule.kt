@@ -1,12 +1,15 @@
 package com.plcoding.cryptocurrencyappyt.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.plcoding.cryptocurrencyappyt.common.Constants
+import com.plcoding.cryptocurrencyappyt.data.local.Preferences.PreferencesRepositoryImpl
 import com.plcoding.cryptocurrencyappyt.data.local.WatchlistDatabase
 import com.plcoding.cryptocurrencyappyt.data.remote.CoinGeckoApi
 import com.plcoding.cryptocurrencyappyt.data.repository.CoinRepositoryImpl
 import com.plcoding.cryptocurrencyappyt.domain.repository.CoinRepository
+import com.plcoding.cryptocurrencyappyt.domain.repository.PreferencesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,4 +49,11 @@ object AppModule {
             .build()
     }
 
+    @Provides
+    @Singleton
+    fun providesPreferencesRepository(
+        app: Application
+    ) : PreferencesRepository {
+        return PreferencesRepositoryImpl(app.applicationContext)
+    }
 }
