@@ -5,5 +5,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "CryptocurrencyAppYT"
+rootProject.name = "ninjawallet"
 include ':app'
