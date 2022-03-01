@@ -47,6 +47,7 @@ class CoinListViewModel @Inject constructor(
                 _percentageSelected.value = repository.getPriceChangePercentage()
             } else if (key == CURRENCY) {
                 _currencySelected.value = repository.getCurrency()
+                refresh()
             }
         }
 
@@ -56,6 +57,8 @@ class CoinListViewModel @Inject constructor(
     }
 
     fun refresh() {
+        _currencySelected.value = repository.getCurrency()
+        _percentageSelected.value = repository.getPriceChangePercentage()
         getCoinsWithParams(
             currency = _currencySelected.value ?: curr2,
             order = "market_cap_desc",
@@ -63,7 +66,6 @@ class CoinListViewModel @Inject constructor(
             page = 1,
             price_change_percentage = PRICE_CHANGE_PERCENTAGES
         )
-        _percentageSelected.value = repository.getPriceChangePercentage()
     }
 
     private fun getCoinsWithParams(

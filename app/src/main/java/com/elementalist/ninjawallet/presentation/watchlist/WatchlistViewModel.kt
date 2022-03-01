@@ -46,6 +46,7 @@ class WatchlistViewModel @Inject constructor(
                 _percentageSelected.value = repository.getPriceChangePercentage()
             } else if (key == CURRENCY) {
                 _currencySelected.value = repository.getCurrency()
+                refresh()
             }
         }
 
@@ -55,9 +56,9 @@ class WatchlistViewModel @Inject constructor(
     }
 
     fun refresh() {
-        getWatchlistCoins()
         _percentageSelected.value = repository.getPriceChangePercentage()
         _currencySelected.value = repository.getCurrency()
+        getWatchlistCoins()
     }
 
     private fun getWatchlistCoins() {

@@ -20,6 +20,11 @@ class SettingsViewModel @Inject constructor(
     val currencySelected: LiveData<String>
         get() = _currencySelected
 
+    private var _coinsEntered = MutableLiveData<String>()
+    val coinsEntered: LiveData<String>
+        get() = _coinsEntered
+
+
     init {
         _percentageSelected.value = repository.getPriceChangePercentage()
         _currencySelected.value = repository.getCurrency()
@@ -33,6 +38,10 @@ class SettingsViewModel @Inject constructor(
     fun currencyChange(currency: String) {
         _currencySelected.value = currency
         repository.setCurrency(currency)
+    }
+
+    fun coinNumberChange(coins: String){
+        _coinsEntered.value = coins
     }
 
 
