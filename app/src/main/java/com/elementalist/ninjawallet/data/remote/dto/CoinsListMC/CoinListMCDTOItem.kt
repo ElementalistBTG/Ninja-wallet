@@ -42,6 +42,7 @@ fun CoinListMCDTOItem.toCoins(): Coin{
         id = id,
         symbol = symbol,
         currentPrice = current_price,
+        market_cap_rank = market_cap_rank,
         marketCap = market_cap,
         priceChange1hr = price_change_percentage_1h_in_currency,
         priceChange24hr = price_change_percentage_24h_in_currency,

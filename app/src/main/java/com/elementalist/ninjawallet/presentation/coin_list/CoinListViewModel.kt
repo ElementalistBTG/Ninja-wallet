@@ -10,8 +10,10 @@ import androidx.lifecycle.viewModelScope
 import com.elementalist.ninjawallet.common.Constants.PRICE_CHANGE_PERCENTAGES
 import com.elementalist.ninjawallet.common.Constants.curr2
 import com.elementalist.ninjawallet.common.Resource
+import com.elementalist.ninjawallet.data.local.Preferences.COINS_DISPLAYED
 import com.elementalist.ninjawallet.data.local.Preferences.CURRENCY
 import com.elementalist.ninjawallet.data.local.Preferences.PRICE_CHANGE_PERCENTAGE
+import com.elementalist.ninjawallet.domain.model.Coin
 import com.elementalist.ninjawallet.domain.repository.PreferencesRepository
 import com.elementalist.ninjawallet.domain.use_case.get_coins_params.GetCoinsParamsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,6 +30,7 @@ class CoinListViewModel @Inject constructor(
 
     private val _state = mutableStateOf<CoinListState>(CoinListState())
     val state: State<CoinListState> = _state
+    private val coinsList = mutableListOf<Coin>()
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
@@ -41,28 +44,44 @@ class CoinListViewModel @Inject constructor(
     val currencySelected: LiveData<String>
         get() = _currencySelected
 
+    private var coinsEntered = 250
+    private var pages = 1
+
+
     private val listener =
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-            if (key == PRICE_CHANGE_PERCENTAGE) {
-                _percentageSelected.value = repository.getPriceChangePercentage()
-            } else if (key == CURRENCY) {
-                _currencySelected.value = repository.getCurrency()
-                refresh()
+            when (key) {
+                PRICE_CHANGE_PERCENTAGE -> {
+                    _percentageSelected.value = repository.getPriceChangePercentage()
+                }
+                CURRENCY -> {
+                    _currencySelected.value = repository.getCurrency()
+                    refresh()
+                }
+                COINS_DISPLAYED -> {
+                    coinsEntered = repository.getCoinsDisplayedNumber()
+                    refresh()
+                }
             }
         }
 
     init {
         repository.pref.registerOnSharedPreferenceChangeListener(listener)
+        _currencySelected.value = repository.getCurrency()
+        _percentageSelected.value = repository.getPriceChangePercentage()
+        coinsEntered = repository.getCoinsDisplayedNumber()
         refresh()
     }
 
     fun refresh() {
-        _currencySelected.value = repository.getCurrency()
-        _percentageSelected.value = repository.getPriceChangePercentage()
+        if(coinsEntered>250){
+            //to be solved on a later date
+            coinsEntered = 250
+        }
         getCoinsWithParams(
             currency = _currencySelected.value ?: curr2,
             order = "market_cap_desc",
-            per_page = 250,
+            per_page = coinsEntered,
             page = 1,
             price_change_percentage = PRICE_CHANGE_PERCENTAGES
         )

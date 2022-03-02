@@ -10,5 +10,6 @@ data class Coin(
     val priceChange24hr: Double,
     val priceChange7d: Double,
     val priceChange14d: Double,
-    val priceChange30d: Double
+    val priceChange30d: Double,
+    val market_cap_rank: Int
 )

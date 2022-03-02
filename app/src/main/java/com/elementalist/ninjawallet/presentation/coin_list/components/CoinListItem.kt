@@ -25,6 +25,7 @@ import com.elementalist.ninjawallet.common.Constants.priceChange5
 import com.elementalist.ninjawallet.domain.model.Coin
 import java.text.NumberFormat
 
+const val indexWeight = 0.5f
 const val coinWeight = 1f
 const val priceWeight = 0.8f
 const val pricePercentageWeight = 0.7f
@@ -56,6 +57,12 @@ fun CoinListItem(
             .padding(10.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
+        Text(
+            text = "${coin.market_cap_rank}",
+            modifier = Modifier.weight(indexWeight),
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.padding(2.dp))
         Text(
             text = "${coin.name} (${coin.symbol})",
             style = MaterialTheme.typography.body1,
@@ -107,6 +114,12 @@ fun HeadersLine(
             .background(MaterialTheme.colors.background),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
+        Text(
+            text = "#",
+            modifier = Modifier.weight(indexWeight),
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.padding(2.dp))
         Text(
             text = "Coin",
             modifier = Modifier.weight(coinWeight),

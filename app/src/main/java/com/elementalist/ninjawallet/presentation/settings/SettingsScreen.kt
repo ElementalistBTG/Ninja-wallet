@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
@@ -12,10 +13,12 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,8 +29,10 @@ fun SettingsScreen(
 //nav controller is not needed since we don't navigate to anywhere through this screen
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
-    var textFieldState by remember { mutableStateOf(TextFieldValue("250")) }
-    val coinsText by viewModel.coinsEntered.observeAsState()
+    var text by remember(viewModel.coinsEntered) { mutableStateOf(viewModel.coinsEntered.value) }
+    val focusManager = LocalFocusManager.current
+    val maxChar = 3 //max characters for coins displayed bound to 999
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -61,9 +66,24 @@ fun SettingsScreen(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         TextField(
-            value = TextFieldValue(coinsText.toString()),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            onValueChange = { newInt -> viewModel.coinNumberChange(newInt.text) },
+            singleLine = true,
+            value = text.toString(),
+            onValueChange = { newInt ->
+                text = newInt.take(maxChar).toIntOrNull() ?: 1
+                if(newInt.length>maxChar){
+                    focusManager.moveFocus(FocusDirection.Down)
+                }else{
+                    viewModel.coinNumberChange(newInt.toIntOrNull() ?: 1)
+                }
+
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(onDone = {
+                focusManager.clearFocus()
+            }),
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
