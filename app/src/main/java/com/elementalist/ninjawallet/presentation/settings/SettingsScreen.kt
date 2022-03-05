@@ -10,7 +10,6 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -40,15 +39,6 @@ fun SettingsScreen(
         //verticalArrangement = Arrangement.SpaceBetween
         //.wrapContentSize(Alignment.Center)
     ) {
-        Text(
-            text = "Settings Screen",
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center,
-            fontSize = 20.sp
-        )
-        Divider(modifier = Modifier.padding(3.dp))
         Text(
             text = "Display price change percentage in units:",
             modifier = Modifier.align(Alignment.CenterHorizontally)
