@@ -23,17 +23,13 @@ class CoinRepositoryImpl @Inject constructor(
 
     override suspend fun getCoinsParams(
         currency: String,
-        order: String,
         per_page: Int,
         page: Int,
-        price_change_percentage: String
     ): CoinListMCDTO {
         return api.getCoinsParams(
             currency = currency,
-            order = order,
             per_page = per_page,
-            page = page,
-            price_change_percentage = price_change_percentage
+            page = page
         )
     }
 
@@ -44,18 +40,14 @@ class CoinRepositoryImpl @Inject constructor(
     override suspend fun getWatchlistCoinData(
         ids: String,
         currency: String,
-        order: String,
         per_page: Int,
-        page: Int,
-        price_change_percentage: String
+        page: Int
     ): CoinListMCDTO {
         return api.getCoinsParams(
             ids = ids,
             currency = currency,
-            order = order,
             per_page = per_page,
-            page = page,
-            price_change_percentage = price_change_percentage
+            page = page
         )
     }
 

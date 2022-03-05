@@ -1,9 +1,9 @@
-package com.elementalist.ninjawallet.presentation.coin_list
+package com.elementalist.ninjawallet.presentation.components
 
 import com.elementalist.ninjawallet.domain.model.Coin
 
 data class CoinListState(
     val isLoading: Boolean = false,
-    val coins : List<Coin> = emptyList(),
+    var coins : List<Coin> = emptyList(),
     val error: String = ""
 )

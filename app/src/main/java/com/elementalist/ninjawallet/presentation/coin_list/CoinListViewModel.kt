@@ -1,13 +1,14 @@
 package com.elementalist.ninjawallet.presentation.coin_list
 
 import android.content.SharedPreferences
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.elementalist.ninjawallet.common.Constants.PRICE_CHANGE_PERCENTAGES
 import com.elementalist.ninjawallet.common.Constants.curr2
 import com.elementalist.ninjawallet.common.Resource
 import com.elementalist.ninjawallet.data.local.Preferences.COINS_DISPLAYED
@@ -16,6 +17,7 @@ import com.elementalist.ninjawallet.data.local.Preferences.PRICE_CHANGE_PERCENTA
 import com.elementalist.ninjawallet.domain.model.Coin
 import com.elementalist.ninjawallet.domain.repository.PreferencesRepository
 import com.elementalist.ninjawallet.domain.use_case.get_coins_params.GetCoinsParamsUseCase
+import com.elementalist.ninjawallet.presentation.components.CoinListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -28,9 +30,15 @@ class CoinListViewModel @Inject constructor(
     // viewmodels maintain our state
     // even after we moved the business logic on use cases
 
-    private val _state = mutableStateOf<CoinListState>(CoinListState())
-    val state: State<CoinListState> = _state
-    private val coinsList = mutableListOf<Coin>()
+    var searchTyped by mutableStateOf(TextFieldValue(""))
+        private set
+
+//    var state by mutableStateOf<CoinListState>(CoinListState())
+//        private set
+
+    //can be implemented with just state
+    private val _myState = MutableStateFlow(CoinListState())
+    val myState: StateFlow<CoinListState> = _myState
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
@@ -74,44 +82,40 @@ class CoinListViewModel @Inject constructor(
     }
 
     fun refresh() {
-        if(coinsEntered>250){
+        if (coinsEntered > 250) {
             //to be solved on a later date
             coinsEntered = 250
         }
         getCoinsWithParams(
             currency = _currencySelected.value ?: curr2,
-            order = "market_cap_desc",
             per_page = coinsEntered,
-            page = 1,
-            price_change_percentage = PRICE_CHANGE_PERCENTAGES
+            page = 1
         )
     }
 
     private fun getCoinsWithParams(
         currency: String,
-        order: String,
         per_page: Int,
-        page: Int,
-        price_change_percentage: String
+        page: Int
     ) {
         //the class GetCoinsUseCase can be called as a function since we overwrite the invoke method
         getCoinsParamsUseCase(
             currency = currency,
-            order = order,
             per_page = per_page,
-            page = page,
-            price_change_percentage = price_change_percentage
+            page = page
         ).onEach { result ->
-            when (result) {
+            _myState.value = when (result) {
                 is Resource.Success -> {
-                    _state.value = CoinListState(coins = result.data ?: emptyList())
+                    CoinListState(coins =
+                    result.data?.filter { coin: Coin ->
+                        coin.name.contains(searchTyped.text, ignoreCase = true)
+                    } ?: emptyList())
                 }
                 is Resource.Error -> {
-                    _state.value =
-                        CoinListState(error = result.message ?: "An unexpected error occured")
+                    CoinListState(error = result.message ?: "An unexpected error occured")
                 }
                 is Resource.Loading -> {
-                    _state.value = CoinListState(isLoading = true)
+                    CoinListState(isLoading = true)
                 }
             }
         }

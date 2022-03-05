@@ -17,10 +17,8 @@ class GetCoinsParamsUseCase @Inject constructor(
     //overwrite the invoke/execute fun -> So we can use the use case as it was a function
     operator fun invoke(
         currency: String,
-        order: String,
         per_page: Int,
-        page: Int,
-        price_change_percentage: String
+        page: Int
     ): Flow<Resource<List<Coin>>> = flow {
         try {
             //we first emit a loading status
@@ -28,10 +26,8 @@ class GetCoinsParamsUseCase @Inject constructor(
             val coins = repository
                 .getCoinsParams(
                     currency = currency,
-                    order = order,
                     per_page = per_page,
-                    page = page,
-                    price_change_percentage = price_change_percentage
+                    page = page
                 )
                 .map { it.toCoins() }//we want to return List<Coin> and not List<CoinDto>
             //if the above line is successful we can emit the Resourse.Success to our viewmodel

@@ -21,16 +21,19 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,13 +52,14 @@ import com.elementalist.ninjawallet.presentation.Watchlist.WatchlistScreen
 import com.elementalist.ninjawallet.presentation.coin_detail.CoinDetailScreen
 import com.elementalist.ninjawallet.presentation.coin_list.CoinListScreen
 import com.elementalist.ninjawallet.presentation.coin_list.CoinListViewModel
+import com.elementalist.ninjawallet.presentation.search.SearchScreen
+import com.elementalist.ninjawallet.presentation.search.SearchViewModel
 import com.elementalist.ninjawallet.presentation.settings.SettingsScreen
 import com.elementalist.ninjawallet.ui.theme.CryptocurrencyAppYTTheme
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
-@AndroidEntryPoint //allows hilt to inject dependencies into this activity or sub-composables
+@AndroidEntryPoint //allows hilt to inject dependencies into this activity or sub-composable
 class MainActivity : ComponentActivity() {
 
     private val coinListViewModel: CoinListViewModel by viewModels()
@@ -80,7 +84,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreenView(
     //must find a way to do this better!
-    viewModel: CommonViewModel = hiltViewModel()
+    viewModel: SearchViewModel = hiltViewModel()
 ) {
 
     val navController = rememberNavController()
@@ -133,12 +137,11 @@ fun AppTopBar (
     navController: NavController,
     topBarState: MutableState<Boolean>,
     secondaryScreen: MutableState<Boolean>,
-    viewModel: CommonViewModel
+    viewModel: SearchViewModel
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val searchClicked = remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
-    val searchTyped = viewModel.searchTyped
     val titleText: String = when (navBackStackEntry?.destination?.route ?: "coin_list_screen") {
         "coin_list_screen" -> "Ninja Wallet"
         "coin_detail_screen" -> "Ninja Wallet"
@@ -155,7 +158,7 @@ fun AppTopBar (
                 SecondaryScreenTopAppBar(navController, titleText)
             } else {
                 if (searchClicked.value) {
-                    SearchTopAppBar(searchTyped, searchClicked, focusManager)
+                    SearchTopAppBar(navController,viewModel, searchClicked, focusManager)
                 } else {
                     GeneralTopAppBar(navController, titleText, searchClicked)
                 }
@@ -224,12 +227,18 @@ private fun GeneralTopAppBar(
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun SearchTopAppBar(
-    searchTyped: MutableState<TextFieldValue>,
+    navController: NavController,
+    viewModel: SearchViewModel,
     searchClicked: MutableState<Boolean>,
     focusManager: FocusManager
 ) {
+    val focusRequester = FocusRequester()
+    val coinSearch = remember {
+        mutableStateOf("")
+    }
     TopAppBar(
         backgroundColor = Color.DarkGray,
         elevation = 10.dp
@@ -237,10 +246,11 @@ private fun SearchTopAppBar(
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 2.dp),
-            value = searchTyped.value,
+                .padding(vertical = 2.dp)
+                .focusRequester(focusRequester),
+            value = coinSearch.value,
             onValueChange = { value ->
-                searchTyped.value = value
+                coinSearch.value = value
             },
             placeholder = {
                 Text(text = "Search Cryptos")
@@ -249,6 +259,7 @@ private fun SearchTopAppBar(
                 IconButton(
                     onClick = {
                         searchClicked.value = false
+                        navController.navigateUp()
                     }
                 ) {
                     Icon(
@@ -263,8 +274,7 @@ private fun SearchTopAppBar(
             trailingIcon = {
                 IconButton(
                     onClick = {
-                        searchTyped.value =
-                            TextFieldValue("") // Remove text from TextField when you press the 'X' icon
+                        viewModel.searchCoin("")
                     }
                 ) {
                     Icon(
@@ -291,12 +301,16 @@ private fun SearchTopAppBar(
                 disabledIndicatorColor = Color.Transparent
             ),
             keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Done
+                imeAction = ImeAction.Search
             ),
-            keyboardActions = KeyboardActions(onDone = {
+            keyboardActions = KeyboardActions(onSearch = {
                 focusManager.clearFocus()
+                navController.navigate(Screen.SearchScreen.route)
             })
         )
+    }
+    LaunchedEffect(Unit){
+        focusRequester.requestFocus()
     }
 }
 
@@ -407,6 +421,11 @@ fun NavigationGraph(navController: NavHostController) {
             route = Screen.SettingsScreen.route
         ) {
             SettingsScreen()
+        }
+        composable(
+            route = Screen.SearchScreen.route
+        ) {
+            SearchScreen(navController)
         }
     }
 }

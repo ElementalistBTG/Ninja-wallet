@@ -12,10 +12,8 @@ interface CoinRepository {
 
     suspend fun getCoinsParams(
         currency: String,
-        order: String,
         per_page: Int,
-        page: Int,
-        price_change_percentage: String
+        page: Int
     ): CoinListMCDTO
 
     suspend fun getWatchlistCoinsFromDB(): List<CoinsEntity>
@@ -23,10 +21,8 @@ interface CoinRepository {
     suspend fun getWatchlistCoinData(
         ids: String,
         currency: String,
-        order: String,
         per_page: Int,
-        page: Int,
-        price_change_percentage: String
+        page: Int
     ): CoinListMCDTO
 
     suspend fun addNewCoinToWatchlist(coin: CoinsEntity)

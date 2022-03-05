@@ -14,6 +14,7 @@ import com.elementalist.ninjawallet.data.local.Preferences.CURRENCY
 import com.elementalist.ninjawallet.data.local.Preferences.PRICE_CHANGE_PERCENTAGE
 import com.elementalist.ninjawallet.domain.repository.PreferencesRepository
 import com.elementalist.ninjawallet.domain.use_case.get_watchlist_coins.GetWatchlistCoinsDataUseCase
+import com.elementalist.ninjawallet.presentation.components.CoinListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -25,8 +26,8 @@ class WatchlistViewModel @Inject constructor(
     private val repository: PreferencesRepository
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<WatchlistState>(WatchlistState())
-    val state: State<WatchlistState> = _state
+    private val _state = mutableStateOf<CoinListState>(CoinListState())
+    val state: State<CoinListState> = _state
 
     private var _emptyList = mutableStateOf(false)
     val emptyList: State<Boolean>
@@ -64,22 +65,20 @@ class WatchlistViewModel @Inject constructor(
     private fun getWatchlistCoins() {
         getWatchlistCoinsDataUseCase(
             currency = _currencySelected.value ?: curr2,
-            order = "market_cap_desc",
             per_page = 250,
-            page = 1,
-            price_change_percentage = PRICE_CHANGE_PERCENTAGES
+            page = 1
         ).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value = WatchlistState(coins = result.data ?: emptyList())
+                    _state.value = CoinListState(coins = result.data ?: emptyList())
                     _emptyList.value = _state.value.coins.isEmpty()
                 }
                 is Resource.Error -> {
                     _state.value =
-                        WatchlistState(error = result.message ?: "An unexpected error occured")
+                        CoinListState(error = result.message ?: "An unexpected error occured")
                 }
                 is Resource.Loading -> {
-                    _state.value = WatchlistState(isLoading = true)
+                    _state.value = CoinListState(isLoading = true)
                 }
             }
         }

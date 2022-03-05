@@ -18,7 +18,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.elementalist.ninjawallet.presentation.CommonViewModel
 import com.elementalist.ninjawallet.presentation.Screen
 import com.elementalist.ninjawallet.presentation.coin_detail.components.CoinListItem
 import com.elementalist.ninjawallet.presentation.coin_detail.components.HeadersLine
@@ -28,21 +27,12 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 @Composable
 fun CoinListScreen(
     navController: NavController,
-    viewModel: CoinListViewModel = hiltViewModel(),
-    commonViewModel: CommonViewModel = hiltViewModel()
+    viewModel: CoinListViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
     val isRefreshing by viewModel.isRefreshing.collectAsState()
     val percentageSelected = viewModel.percentageSelected.observeAsState()
     val currencySelected = viewModel.currencySelected.observeAsState()
-
-    val coins = if (commonViewModel.searchTyped.value.toString() == "") {
-        state.coins
-    } else {
-        state.coins.filter {
-            it.name.contains(commonViewModel.searchTyped.value.toString(), ignoreCase = true)
-        }
-    }
+    val state by viewModel.myState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
@@ -57,7 +47,7 @@ fun CoinListScreen(
                     viewModel.refresh()
                 }) {
                 LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                    items(coins) { coin ->
+                    items(state.coins) { coin ->
                         CoinListItem(
                             coin = coin,
                             onItemClick = {

@@ -10,5 +10,7 @@ sealed class Screen(val route: String, val icon: Int? = null){
     object WatchlistScreen: Screen("Watchlist_screen", icon = R.drawable.baseline_watchlist)
     //top bar settings
     object SettingsScreen: Screen("settings_screen")
+    //search screen
+    object SearchScreen: Screen("search_screen")
 }
 

@@ -18,10 +18,8 @@ class GetWatchlistCoinsDataUseCase @Inject constructor(
     //overwrite the invoke/execute fun -> So we can use the use case as it was a function
     operator fun invoke(
         currency: String,
-        order: String,
         per_page: Int,
-        page: Int,
-        price_change_percentage: String
+        page: Int
     ): Flow<Resource<List<Coin>>> = flow {
         try {
             //we first emit a loading status
@@ -39,10 +37,8 @@ class GetWatchlistCoinsDataUseCase @Inject constructor(
                 val watchlistItems = repository.getWatchlistCoinData(
                     ids = coinIds,
                     currency = currency,
-                    order = order,
                     per_page = per_page,
-                    page = page,
-                    price_change_percentage = price_change_percentage
+                    page = page
                 ).map { it.toCoins() }
 
                 //if the above line is successful we can emit the Resource.Success to our viewmodel
