@@ -31,8 +31,7 @@ class CoinDetailViewModel @Inject constructor(
     val state: State<CoinDetailState> = _state
 
     private var _exists = MutableLiveData<Boolean>()
-    val exists: LiveData<Boolean>
-        get() = _exists
+    val exists: LiveData<Boolean> = _exists
 
     private fun checkCoinExists(coinId: String) {
         viewModelScope.launch {

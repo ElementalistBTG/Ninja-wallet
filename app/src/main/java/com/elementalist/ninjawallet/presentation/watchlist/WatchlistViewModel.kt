@@ -30,16 +30,13 @@ class WatchlistViewModel @Inject constructor(
     val state: State<CoinListState> = _state
 
     private var _emptyList = mutableStateOf(false)
-    val emptyList: State<Boolean>
-        get() = _emptyList
+    val emptyList: State<Boolean> = _emptyList
 
     private var _percentageSelected = MutableLiveData<String>()
-    val percentageSelected: LiveData<String>
-        get() = _percentageSelected
+    val percentageSelected: LiveData<String> = _percentageSelected
 
     private var _currencySelected = MutableLiveData<String>()
-    val currencySelected: LiveData<String>
-        get() = _currencySelected
+    val currencySelected: LiveData<String> = _currencySelected
 
     private val listener =
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
