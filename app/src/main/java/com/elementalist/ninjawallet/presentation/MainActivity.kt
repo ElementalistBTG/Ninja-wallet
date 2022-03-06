@@ -1,59 +1,43 @@
 package com.elementalist.ninjawallet.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusManager
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.elementalist.ninjawallet.R
 import com.elementalist.ninjawallet.presentation.Watchlist.WatchlistScreen
 import com.elementalist.ninjawallet.presentation.coin_detail.CoinDetailScreen
 import com.elementalist.ninjawallet.presentation.coin_list.CoinListScreen
 import com.elementalist.ninjawallet.presentation.coin_list.CoinListViewModel
 import com.elementalist.ninjawallet.presentation.search.SearchScreen
-import com.elementalist.ninjawallet.presentation.search.SearchViewModel
 import com.elementalist.ninjawallet.presentation.settings.SettingsScreen
 import com.elementalist.ninjawallet.ui.theme.CryptocurrencyAppYTTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -82,10 +66,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun MainScreenView(
-    //must find a way to do this better!
-    viewModel: SearchViewModel = hiltViewModel()
-) {
+fun MainScreenView() {
 
     val navController = rememberNavController()
     // State of topBar, set state to false, if current page route is anything other than CoinListScreen
@@ -94,7 +75,8 @@ fun MainScreenView(
     // Subscribe to navBackStackEntry, required to get current route
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     // Control TopBar and BottomBar
-    when (navBackStackEntry?.destination?.route) {
+    //we must filter route values for coin_details_screen
+    when (navBackStackEntry?.destination?.route?.substringBefore("/")) {
         "coin_list_screen" -> {
             topBarState.value = true
             secondaryScreen.value = false
@@ -105,9 +87,13 @@ fun MainScreenView(
         }
         "Watchlist_screen" -> {
             topBarState.value = true
-            secondaryScreen.value = false
+            secondaryScreen.value = true
         }
         "settings_screen" -> {
+            topBarState.value = true
+            secondaryScreen.value = true
+        }
+        "search_screen" ->{
             topBarState.value = true
             secondaryScreen.value = true
         }
@@ -117,8 +103,7 @@ fun MainScreenView(
             AppTopBar(
                 navController = navController,
                 topBarState = topBarState,
-                secondaryScreen = secondaryScreen,
-                viewModel = viewModel
+                secondaryScreen = secondaryScreen
             )
         },
         bottomBar = { BottomNavigation(navController = navController) },
@@ -131,23 +116,20 @@ fun MainScreenView(
     )
 }
 
-
 @Composable
-fun AppTopBar (
+fun AppTopBar(
     navController: NavController,
     topBarState: MutableState<Boolean>,
-    secondaryScreen: MutableState<Boolean>,
-    viewModel: SearchViewModel
+    secondaryScreen: MutableState<Boolean>
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val searchClicked = remember { mutableStateOf(false) }
-    val focusManager = LocalFocusManager.current
     val titleText: String = when (navBackStackEntry?.destination?.route ?: "coin_list_screen") {
         "coin_list_screen" -> "Ninja Wallet"
-        "coin_detail_screen" -> "Ninja Wallet"
         "Watchlist_screen" -> "Watchlist"
         "settings_screen" -> "Settings"
-        else -> "Ninja Wallet"
+        "search_screen" -> "Search coins"
+        "coin_detail_screen" -> "Coin Details"
+        else -> ""
     }
     AnimatedVisibility(
         visible = topBarState.value,
@@ -157,11 +139,7 @@ fun AppTopBar (
             if (secondaryScreen.value) {
                 SecondaryScreenTopAppBar(navController, titleText)
             } else {
-                if (searchClicked.value) {
-                    SearchTopAppBar(navController,viewModel, searchClicked, focusManager)
-                } else {
-                    GeneralTopAppBar(navController, titleText, searchClicked)
-                }
+                GeneralTopAppBar(navController, titleText)
             }
         }
     )
@@ -170,8 +148,7 @@ fun AppTopBar (
 @Composable
 private fun GeneralTopAppBar(
     navController: NavController,
-    titleText: String,
-    searchClicked: MutableState<Boolean>
+    titleText: String
 ) {
     TopAppBar(
         backgroundColor = Color.DarkGray,
@@ -212,7 +189,7 @@ private fun GeneralTopAppBar(
             )
             IconButton(
                 onClick = {
-                    searchClicked.value = true
+                    navController.navigate(Screen.SearchScreen.route)
                 },
                 modifier = Modifier
                     .constrainAs(search) {
@@ -224,93 +201,6 @@ private fun GeneralTopAppBar(
                 Icon(Icons.Filled.Search, "Search")
             }
         }
-    }
-}
-
-@OptIn(ExperimentalComposeUiApi::class)
-@Composable
-private fun SearchTopAppBar(
-    navController: NavController,
-    viewModel: SearchViewModel,
-    searchClicked: MutableState<Boolean>,
-    focusManager: FocusManager
-) {
-    val focusRequester = FocusRequester()
-    val coinSearch = remember {
-        mutableStateOf("")
-    }
-    TopAppBar(
-        backgroundColor = Color.DarkGray,
-        elevation = 10.dp
-    ) {
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 2.dp)
-                .focusRequester(focusRequester),
-            value = coinSearch.value,
-            onValueChange = { value ->
-                coinSearch.value = value
-            },
-            placeholder = {
-                Text(text = "Search Cryptos")
-            },
-            leadingIcon = {
-                IconButton(
-                    onClick = {
-                        searchClicked.value = false
-                        navController.navigateUp()
-                    }
-                ) {
-                    Icon(
-                        Icons.Default.ArrowBack,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .padding(15.dp)
-                            .size(24.dp)
-                    )
-                }
-            },
-            trailingIcon = {
-                IconButton(
-                    onClick = {
-                        viewModel.searchCoin("")
-                    }
-                ) {
-                    Icon(
-                        Icons.Default.Close,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .padding(15.dp)
-                            .size(24.dp)
-                    )
-                }
-            },
-            textStyle = TextStyle(color = Color.White, fontSize = 12.sp),
-            singleLine = true,
-            shape =
-            RectangleShape, // The TextFiled has rounded corners top left and right by default
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = Color.White,
-                cursorColor = Color.White,
-                leadingIconColor = Color.White,
-                trailingIconColor = Color.White,
-                backgroundColor = colorResource(id = R.color.medium_gray),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
-            ),
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Search
-            ),
-            keyboardActions = KeyboardActions(onSearch = {
-                focusManager.clearFocus()
-                navController.navigate(Screen.SearchScreen.route)
-            })
-        )
-    }
-    LaunchedEffect(Unit){
-        focusRequester.requestFocus()
     }
 }
 
