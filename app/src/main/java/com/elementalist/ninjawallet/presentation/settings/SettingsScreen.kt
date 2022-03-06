@@ -15,12 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
@@ -30,7 +27,7 @@ fun SettingsScreen(
 ) {
     var text by remember(viewModel.coinsEntered) { mutableStateOf(viewModel.coinsEntered.value) }
     val focusManager = LocalFocusManager.current
-    val maxChar = 3 //max characters for coins displayed bound to 999
+//    val maxChar = 3 //max characters for coins displayed bound to 999
 
     Column(
         modifier = Modifier
@@ -52,19 +49,23 @@ fun SettingsScreen(
         CurrenciesRadioGroup(viewModel)
         Divider(modifier = Modifier.padding(5.dp), color = Color.Black)
         Text(
-            text = "Coins displayed:",
+            text = "Coins displayed: (max 250)",
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         TextField(
             singleLine = true,
             value = text.toString(),
             onValueChange = { newInt ->
-                text = newInt.take(maxChar).toIntOrNull() ?: 1
-                if(newInt.length>maxChar){
-                    focusManager.moveFocus(FocusDirection.Down)
-                }else{
-                    viewModel.coinNumberChange(newInt.toIntOrNull() ?: 1)
-                }
+                val numberFromText = newInt.toIntOrNull() ?: 1
+                val numberRestrained : Int = if (numberFromText > 250) 250 else numberFromText
+                text = numberRestrained
+                viewModel.coinNumberChange(numberRestrained)
+//                text = newInt.take(maxChar).toIntOrNull() ?: 1
+//                if (newInt.length > maxChar) {
+//                    focusManager.moveFocus(FocusDirection.Down)
+//                } else {
+//                    viewModel.coinNumberChange(newInt.toIntOrNull() ?: 1)
+//                }
 
             },
             keyboardOptions = KeyboardOptions(

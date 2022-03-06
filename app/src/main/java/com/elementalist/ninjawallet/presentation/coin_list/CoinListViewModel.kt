@@ -1,10 +1,6 @@
 package com.elementalist.ninjawallet.presentation.coin_list
 
 import android.content.SharedPreferences
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,15 +26,11 @@ class CoinListViewModel @Inject constructor(
     // viewmodels maintain our state
     // even after we moved the business logic on use cases
 
-    var searchTyped by mutableStateOf(TextFieldValue(""))
-        private set
-
-//    var state by mutableStateOf<CoinListState>(CoinListState())
-//        private set
-
     //can be implemented with just state
     private val _myState = MutableStateFlow(CoinListState())
     val myState: StateFlow<CoinListState> = _myState
+
+    private val coinsList = mutableListOf<Coin>()
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
@@ -53,8 +45,6 @@ class CoinListViewModel @Inject constructor(
         get() = _currencySelected
 
     private var coinsEntered = 250
-    private var pages = 1
-
 
     private val listener =
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
@@ -82,8 +72,7 @@ class CoinListViewModel @Inject constructor(
     }
 
     fun refresh() {
-        if (coinsEntered > 250) {
-            //to be solved on a later date
+        if (coinsEntered>250){
             coinsEntered = 250
         }
         getCoinsWithParams(
@@ -106,10 +95,9 @@ class CoinListViewModel @Inject constructor(
         ).onEach { result ->
             _myState.value = when (result) {
                 is Resource.Success -> {
-                    CoinListState(coins =
-                    result.data?.filter { coin: Coin ->
-                        coin.name.contains(searchTyped.text, ignoreCase = true)
-                    } ?: emptyList())
+                    CoinListState(
+                        coins = result.data ?: emptyList()
+                    )
                 }
                 is Resource.Error -> {
                     CoinListState(error = result.message ?: "An unexpected error occured")
