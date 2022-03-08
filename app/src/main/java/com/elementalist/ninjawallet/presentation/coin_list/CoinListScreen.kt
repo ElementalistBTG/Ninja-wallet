@@ -34,6 +34,7 @@ fun CoinListScreen(
     val currencySelected = viewModel.currencySelected.observeAsState()
     val state by viewModel.myState.collectAsState()
 
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
             HeadersLine(

@@ -256,7 +256,7 @@ fun BottomNavigation(navController: NavController) {
     )
     BottomNavigation(
         backgroundColor = Color.DarkGray,
-        contentColor = Color.Black
+        contentColor = Color.Green
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

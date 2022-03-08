@@ -14,6 +14,7 @@ import com.elementalist.ninjawallet.data.local.Preferences.CURRENCY
 import com.elementalist.ninjawallet.data.local.Preferences.PRICE_CHANGE_PERCENTAGE
 import com.elementalist.ninjawallet.domain.repository.PreferencesRepository
 import com.elementalist.ninjawallet.domain.use_case.get_watchlist_coins.GetWatchlistCoinsDataUseCase
+import com.elementalist.ninjawallet.presentation.ViewModelWithSharedPreferencesAccess
 import com.elementalist.ninjawallet.presentation.components.CoinListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -24,7 +25,7 @@ import javax.inject.Inject
 class WatchlistViewModel @Inject constructor(
     private val getWatchlistCoinsDataUseCase: GetWatchlistCoinsDataUseCase,
     private val repository: PreferencesRepository
-) : ViewModel() {
+) : ViewModelWithSharedPreferencesAccess(repository) {
 
     private val _state = mutableStateOf<CoinListState>(CoinListState())
     val state: State<CoinListState> = _state
@@ -32,37 +33,18 @@ class WatchlistViewModel @Inject constructor(
     private var _emptyList = mutableStateOf(false)
     val emptyList: State<Boolean> = _emptyList
 
-    private var _percentageSelected = MutableLiveData<String>()
-    val percentageSelected: LiveData<String> = _percentageSelected
-
-    private var _currencySelected = MutableLiveData<String>()
-    val currencySelected: LiveData<String> = _currencySelected
-
-    private val listener =
-        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-            if (key == PRICE_CHANGE_PERCENTAGE) {
-                _percentageSelected.value = repository.getPriceChangePercentage()
-            } else if (key == CURRENCY) {
-                _currencySelected.value = repository.getCurrency()
-                refresh()
-            }
-        }
-
     init {
-        repository.pref.registerOnSharedPreferenceChangeListener(listener)
         refresh()
     }
 
-    fun refresh() {
-        _percentageSelected.value = repository.getPriceChangePercentage()
-        _currencySelected.value = repository.getCurrency()
+    override fun refresh() {
         getWatchlistCoins()
     }
 
     private fun getWatchlistCoins() {
         getWatchlistCoinsDataUseCase(
-            currency = _currencySelected.value ?: curr2,
-            per_page = 250,
+            currency = currencySelected.value ?: curr2,
+            per_page = coinsEntered.value ?: 250,
             page = 1
         ).onEach { result ->
             when (result) {
@@ -82,9 +64,5 @@ class WatchlistViewModel @Inject constructor(
             .launchIn(viewModelScope)// returns the flow that emits the resource values over time. We must launch it as a coroutine!
     }
 
-    override fun onCleared() {
-        repository.pref.unregisterOnSharedPreferenceChangeListener(listener)
-        super.onCleared()
-    }
 }
 
