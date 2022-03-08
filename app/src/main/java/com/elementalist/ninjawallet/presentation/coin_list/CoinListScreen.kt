@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.elementalist.ninjawallet.presentation.Screen
-import com.elementalist.ninjawallet.presentation.coin_detail.components.CoinListItem
-import com.elementalist.ninjawallet.presentation.coin_detail.components.HeadersLine
+import com.elementalist.ninjawallet.presentation.components.CoinListItem
+import com.elementalist.ninjawallet.presentation.components.HeadersLine
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
@@ -33,7 +33,6 @@ fun CoinListScreen(
     val percentageSelected = viewModel.percentageSelected.observeAsState()
     val currencySelected = viewModel.currencySelected.observeAsState()
     val state by viewModel.myState.collectAsState()
-
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {

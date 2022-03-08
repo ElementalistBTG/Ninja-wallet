@@ -1,7 +1,8 @@
-package com.elementalist.ninjawallet.data.local
+package com.elementalist.ninjawallet.data.local.Database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.elementalist.ninjawallet.data.local.Database.WatchlistDao
 import com.elementalist.ninjawallet.data.local.entity.CoinsEntity
 
 @Database(
@@ -10,7 +11,7 @@ import com.elementalist.ninjawallet.data.local.entity.CoinsEntity
     exportSchema = false
 )
 
-abstract class WatchlistDatabase: RoomDatabase(){
-    abstract val watchlistDao : WatchlistDao
+abstract class WatchlistDatabase : RoomDatabase() {
+    abstract val watchlistDao: WatchlistDao
 
 }

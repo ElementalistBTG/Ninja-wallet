@@ -1,4 +1,4 @@
-package com.elementalist.ninjawallet.data.local
+package com.elementalist.ninjawallet.data.local.Database
 
 import androidx.room.*
 import com.elementalist.ninjawallet.data.local.entity.CoinsEntity
@@ -13,7 +13,7 @@ interface WatchlistDao {
     suspend fun exists(id: String): Boolean
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCoinToWatchlist(coin:CoinsEntity)
+    suspend fun insertCoinToWatchlist(coin: CoinsEntity)
 
     @Delete
     suspend fun deleteCoinFromWatchlist(coin: CoinsEntity)

@@ -1,4 +1,4 @@
-package com.elementalist.ninjawallet.presentation.coin_detail.components
+package com.elementalist.ninjawallet.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

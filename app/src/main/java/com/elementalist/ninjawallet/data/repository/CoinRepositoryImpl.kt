@@ -1,6 +1,6 @@
 package com.elementalist.ninjawallet.data.repository
 
-import com.elementalist.ninjawallet.data.local.WatchlistDao
+import com.elementalist.ninjawallet.data.local.Database.WatchlistDao
 import com.elementalist.ninjawallet.data.local.entity.CoinsEntity
 import com.elementalist.ninjawallet.data.remote.CoinGeckoApi
 import com.elementalist.ninjawallet.data.remote.dto.CoinDetails.CoinDetailDTO

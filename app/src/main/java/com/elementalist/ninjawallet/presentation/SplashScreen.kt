@@ -16,10 +16,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
-import kotlinx.coroutines.delay
 import com.elementalist.ninjawallet.R
+import kotlinx.coroutines.delay
 
 //In order to use this screen you must adapt the navigation for each screen separately
+//Not used currently
 
 @Composable
 fun SplashScreen(navController: NavController?) {

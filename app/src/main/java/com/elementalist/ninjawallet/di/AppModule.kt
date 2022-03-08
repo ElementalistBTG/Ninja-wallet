@@ -3,7 +3,7 @@ package com.elementalist.ninjawallet.di
 import android.app.Application
 import androidx.room.Room
 import com.elementalist.ninjawallet.common.Constants
-import com.elementalist.ninjawallet.data.local.WatchlistDatabase
+import com.elementalist.ninjawallet.data.local.Database.WatchlistDatabase
 import com.elementalist.ninjawallet.data.remote.CoinGeckoApi
 import com.elementalist.ninjawallet.data.repository.CoinRepositoryImpl
 import com.elementalist.ninjawallet.data.repository.PreferencesRepositoryImpl

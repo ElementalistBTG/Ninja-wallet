@@ -1,4 +1,4 @@
-package com.elementalist.ninjawallet.presentation.Watchlist
+package com.elementalist.ninjawallet.presentation.watchlist
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.elementalist.ninjawallet.presentation.Screen
-import com.elementalist.ninjawallet.presentation.coin_detail.components.CoinListItem
-import com.elementalist.ninjawallet.presentation.coin_detail.components.HeadersLine
+import com.elementalist.ninjawallet.presentation.components.CoinListItem
+import com.elementalist.ninjawallet.presentation.components.HeadersLine
 
 @Composable
 fun WatchlistScreen(
@@ -34,9 +34,10 @@ fun WatchlistScreen(
         Column(modifier = Modifier.fillMaxSize()) {
             HeadersLine(
                 percentageSelected.value.toString(),
-                currencySelected.value.toString())
+                currencySelected.value.toString()
+            )
             Divider(Modifier.padding(6.dp), color = Color.LightGray)
-            if(!emptyList.value){
+            if (!emptyList.value) {
                 LazyColumn(modifier = Modifier.fillMaxWidth()) {
                     items(state.coins) { coin ->
                         CoinListItem(
@@ -49,14 +50,14 @@ fun WatchlistScreen(
                         Divider(Modifier.padding(3.dp), color = Color.Green)
                     }
                 }
-            }else{
+            } else {
                 Text(
                     modifier = Modifier.fillMaxSize(),
                     text = "Add coins to your watchlist to display here"
                 )
             }
-            
-            
+
+
         }
 
         if (state.error.isNotBlank()) {//if it contains an error

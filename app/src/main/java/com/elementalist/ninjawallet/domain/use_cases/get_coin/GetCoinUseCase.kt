@@ -1,4 +1,4 @@
-package com.elementalist.ninjawallet.domain.use_case.get_coin
+package com.elementalist.ninjawallet.domain.use_cases.get_coin
 
 import android.util.Log
 import com.elementalist.ninjawallet.common.Resource
@@ -16,21 +16,19 @@ class GetCoinUseCase @Inject constructor(
 ) {
     //overwrite the invoke/execute fun -> So we can use the use case as it was a function
     operator fun invoke(coinId: String): Flow<Resource<CoinDetail>> = flow {
-        try{
+        try {
             //we first emit a loading status
             emit(Resource.Loading<CoinDetail>())
             val coin = repository.getCoinById(coinId).toCoinDetail()
             Log.d("mytag", coin.toString())
             //if the above line is successful we can emit the Resourse.Success to our viewmodel
             emit(Resource.Success<CoinDetail>(coin))
-        }catch (e:HttpException){
+        } catch (e: HttpException) {
             //if we get an http response code that doesn't start with a 2XX
-            Log.d("mytag", e.toString())
             emit(Resource.Error<CoinDetail>(e.localizedMessage ?: "An unexpected error occurred!"))
-        }catch (e:IOException){
+        } catch (e: IOException) {
             //if our repository api can't talk to the remote api
             //e.g. if we have no internet connection
-            Log.d("mytag", e.toString())
             emit(Resource.Error<CoinDetail>("Couldn't reach server, check your internet connection"))
         }
     }

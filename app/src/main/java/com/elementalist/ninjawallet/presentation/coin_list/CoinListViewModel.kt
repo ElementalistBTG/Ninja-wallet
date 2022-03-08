@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.elementalist.ninjawallet.common.Constants.curr2
 import com.elementalist.ninjawallet.common.Resource
 import com.elementalist.ninjawallet.domain.repository.PreferencesRepository
-import com.elementalist.ninjawallet.domain.use_case.get_coins_params.GetCoinsParamsUseCase
+import com.elementalist.ninjawallet.domain.use_cases.get_coins_params.GetCoinsParamsUseCase
 import com.elementalist.ninjawallet.presentation.ViewModelWithSharedPreferencesAccess
 import com.elementalist.ninjawallet.presentation.components.CoinListState
 import dagger.hilt.android.lifecycle.HiltViewModel

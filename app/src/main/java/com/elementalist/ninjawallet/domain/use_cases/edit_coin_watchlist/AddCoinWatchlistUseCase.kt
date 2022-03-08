@@ -1,4 +1,4 @@
-package com.elementalist.ninjawallet.domain.use_case.add_coin_Watchlist
+package com.elementalist.ninjawallet.domain.use_cases.add_coin_Watchlist
 
 
 import com.elementalist.ninjawallet.data.local.entity.CoinsEntity

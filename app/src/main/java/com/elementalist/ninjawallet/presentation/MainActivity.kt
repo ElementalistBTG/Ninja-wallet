@@ -1,12 +1,10 @@
 package com.elementalist.ninjawallet.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
@@ -17,7 +15,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,7 +34,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.elementalist.ninjawallet.presentation.Watchlist.WatchlistScreen
+import com.elementalist.ninjawallet.presentation.watchlist.WatchlistScreen
 import com.elementalist.ninjawallet.presentation.coin_detail.CoinDetailScreen
 import com.elementalist.ninjawallet.presentation.coin_list.CoinListScreen
 import com.elementalist.ninjawallet.presentation.coin_list.CoinListViewModel
@@ -93,7 +94,7 @@ fun MainScreenView() {
             topBarState.value = true
             secondaryScreen.value = true
         }
-        "search_screen" ->{
+        "search_screen" -> {
             topBarState.value = true
             secondaryScreen.value = true
         }
@@ -256,7 +257,7 @@ fun BottomNavigation(navController: NavController) {
     )
     BottomNavigation(
         backgroundColor = Color.DarkGray,
-        contentColor = Color.Green
+        contentColor = Color.Black
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -270,7 +271,7 @@ fun BottomNavigation(navController: NavController) {
                         )
                     }
                 },
-                selectedContentColor = Color.Black,
+                selectedContentColor = Color.Green,
                 unselectedContentColor = Color.Black.copy(0.4f),
                 selected = currentRoute == item.route,
                 onClick = {

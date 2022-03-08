@@ -12,7 +12,6 @@ import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
@@ -57,7 +56,7 @@ fun SettingsScreen(
             value = text.toString(),
             onValueChange = { newInt ->
                 val numberFromText = newInt.toIntOrNull() ?: 1
-                val numberRestrained : Int = if (numberFromText > 250) 250 else numberFromText
+                val numberRestrained: Int = if (numberFromText > 250) 250 else numberFromText
                 text = numberRestrained
                 viewModel.coinNumberChange(numberRestrained)
 //                text = newInt.take(maxChar).toIntOrNull() ?: 1

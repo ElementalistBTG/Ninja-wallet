@@ -33,24 +33,28 @@ fun CoinDetailScreen(
             CoinsEntity(
                 id = it.id
             )
-        }?.let { viewModel.addCoinToWatchlist(coin = it)
+        }?.let {
+            viewModel.addCoinToWatchlist(coin = it)
             Toast.makeText(
                 context,
                 "Coin added to WatchList",
                 Toast.LENGTH_SHORT
-            ).show()}
+            ).show()
+        }
     }
     val removeCoinFromWatchlist = {
         state.coin?.let {
             CoinsEntity(
                 id = it.id
             )
-        }?.let { viewModel.removeCoinFromWatchlist(coin = it)
+        }?.let {
+            viewModel.removeCoinFromWatchlist(coin = it)
             Toast.makeText(
                 context,
                 "Coin removed from WatchList",
                 Toast.LENGTH_SHORT
-            ).show()}
+            ).show()
+        }
     }
 
 

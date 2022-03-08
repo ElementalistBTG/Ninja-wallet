@@ -1,6 +1,5 @@
 package com.elementalist.ninjawallet.presentation.coin_detail.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +28,7 @@ fun LinksListItem(
             )
             Spacer(modifier = Modifier.height(4.dp))
             link.blockchain_site.forEach { site_link ->
-                if(site_link.isNotBlank()){
+                if (site_link.isNotBlank()) {
                     Text(
                         text = site_link,
                         style = MaterialTheme.typography.body2,
@@ -49,7 +48,6 @@ fun LinksListItem(
             )
             Spacer(modifier = Modifier.height(4.dp))
             link.homepage.forEach { site_link ->
-                Log.d("mytag", site_link.toString())
                 Text(
                     text = site_link,
                     style = MaterialTheme.typography.body2,
