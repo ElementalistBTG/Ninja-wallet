@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.accompanist:accompanist-insets-ui:0.24.3-alpha@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c1414e8fe476da894d00d0e98ba3cbce/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c1414e8fe476da894d00d0e98ba3cbce/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c1414e8fe476da894d00d0e98ba3cbce/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.accompanist/accompanist-insets-ui/0.24.3-alpha/38c55ab09bb72749b39bd839fef913ebc2fd776/accompanist-insets-ui-0.24.3-alpha-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.accompanist/accompanist-insets-ui/0.24.3-alpha/c342b02d650367478ae31ebc6a9ae385fb487dd2/accompanist-insets-ui-0.24.3-alpha-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
