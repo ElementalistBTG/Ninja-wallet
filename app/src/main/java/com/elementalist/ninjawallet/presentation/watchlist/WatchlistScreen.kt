@@ -3,10 +3,9 @@ package com.elementalist.ninjawallet.presentation.watchlist
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -56,8 +55,6 @@ fun WatchlistScreen(
                     text = "Add coins to your watchlist to display here"
                 )
             }
-
-
         }
 
         if (state.error.isNotBlank()) {//if it contains an error
@@ -76,5 +73,19 @@ fun WatchlistScreen(
         if (state.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
+
+        FloatingActionButton(
+            onClick = { viewModel.refresh() },
+            elevation = FloatingActionButtonDefaults.elevation(8.dp),
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(20.dp)
+        ) {
+            Icon(
+                Icons.Filled.Refresh,
+                contentDescription = "refresh"
+            )
+        }
+
     }
 }

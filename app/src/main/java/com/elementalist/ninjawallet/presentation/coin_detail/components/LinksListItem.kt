@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,13 +28,16 @@ fun LinksListItem(
                 style = MaterialTheme.typography.h4
             )
             Spacer(modifier = Modifier.height(4.dp))
+
             link.blockchain_site.forEach { site_link ->
                 if (site_link.isNotBlank()) {
-                    Text(
-                        text = site_link,
-                        style = MaterialTheme.typography.body2,
-                        fontStyle = FontStyle.Italic
-                    )
+                    SelectionContainer {
+                        Text(
+                            text = site_link,
+                            style = MaterialTheme.typography.body2,
+                            fontStyle = FontStyle.Italic
+                        )
+                    }
                     Spacer(modifier = Modifier.height(4.dp))
                 }
 
@@ -48,11 +52,13 @@ fun LinksListItem(
             )
             Spacer(modifier = Modifier.height(4.dp))
             link.homepage.forEach { site_link ->
-                Text(
-                    text = site_link,
-                    style = MaterialTheme.typography.body2,
-                    fontStyle = FontStyle.Italic
-                )
+                SelectionContainer {
+                    Text(
+                        text = site_link,
+                        style = MaterialTheme.typography.body2,
+                        fontStyle = FontStyle.Italic
+                    )
+                }
                 Spacer(modifier = Modifier.height(4.dp))
             }
             Spacer(modifier = Modifier.height(10.dp))

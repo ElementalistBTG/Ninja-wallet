@@ -10,14 +10,18 @@ private val DarkColorPalette = darkColors(
     primary = ColorPrimary,
     background = DarkGray,
     onBackground = TextWhite,
-    onPrimary = DarkGray
+    onPrimary = DarkGray,
+    primaryVariant = LightGreen,
+    onError = LightRed
 )
 
 private val LightColorPalette = lightColors(
     primary = ColorPrimary,
     background = Color.White,
     onBackground = MediumGray,
-    onPrimary = DarkGray
+    onPrimary = DarkGray,
+    primaryVariant = LightGreen,
+    onError = LightRed
 )
 
 @Composable

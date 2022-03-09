@@ -20,7 +20,6 @@ class GetCoinUseCase @Inject constructor(
             //we first emit a loading status
             emit(Resource.Loading<CoinDetail>())
             val coin = repository.getCoinById(coinId).toCoinDetail()
-            Log.d("mytag", coin.toString())
             //if the above line is successful we can emit the Resourse.Success to our viewmodel
             emit(Resource.Success<CoinDetail>(coin))
         } catch (e: HttpException) {

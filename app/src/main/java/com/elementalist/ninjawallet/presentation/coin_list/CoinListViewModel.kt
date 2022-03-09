@@ -1,5 +1,8 @@
 package com.elementalist.ninjawallet.presentation.coin_list
 
+import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.SnackbarHostState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.elementalist.ninjawallet.common.Constants.curr2
 import com.elementalist.ninjawallet.common.Resource
@@ -9,6 +12,7 @@ import com.elementalist.ninjawallet.presentation.ViewModelWithSharedPreferencesA
 import com.elementalist.ninjawallet.presentation.components.CoinListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,8 +30,21 @@ class CoinListViewModel @Inject constructor(
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
+    //for snackbar
+    var snakBarShown = mutableStateOf(false)
+    val snackbarHostState = SnackbarHostState()
+
     init {
         refresh()
+        if (!snakBarShown.value) {
+            viewModelScope.launch {
+                snackbarHostState.showSnackbar(
+                    message = "Powered by CoinGecko API",
+                    duration = SnackbarDuration.Short
+                )
+            }
+            snakBarShown.value = true
+        }
     }
 
     override fun refresh() {

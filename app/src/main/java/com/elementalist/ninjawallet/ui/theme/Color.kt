@@ -8,3 +8,4 @@ val ColorPrimary = Color(0xFF08FF04)
 val TextWhite = Color(0xFFEEEEEE)
 
 val LightGreen = Color(0xA058FF00)
+val LightRed = Color(0xffff4d4d)

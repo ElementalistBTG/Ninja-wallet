@@ -3,6 +3,7 @@ package com.elementalist.ninjawallet.presentation.coin_detail
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -11,12 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.elementalist.ninjawallet.common.useful.ExpandingText
+import com.elementalist.ninjawallet.common.useful.ExpandingText2
 import com.elementalist.ninjawallet.data.local.entity.CoinsEntity
 import com.elementalist.ninjawallet.presentation.coin_detail.components.LinksListItem
 
@@ -67,19 +73,32 @@ fun CoinDetailScreen(
                 item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.aligned(Alignment.CenterHorizontally)
                     ) {
                         Text(
                             text = "${coin.market_cap_rank}. ${coin.name} (${coin.symbol})",
+                            color = MaterialTheme.colors.primaryVariant,
                             style = MaterialTheme.typography.h2,
-                            modifier = Modifier.weight(8f)
+                            modifier = Modifier.weight(0.8f).align(Alignment.CenterVertically)
+                        )
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(viewModel.state.value.coin?.image?.large)
+                                .crossfade(true)
+                                .build() ,
+                            contentDescription = null,
+                            contentScale = ContentScale.Inside,
+                            modifier = Modifier.clip(CircleShape).weight(0.5f)
                         )
                     }
                     Spacer(modifier = Modifier.height(15.dp))
-                    ExpandingText(text = coin.description.en)
+                    ExpandingText2(
+                        text = coin.description.en,
+                        context = context)
                     Spacer(modifier = Modifier.height(15.dp))
                     Text(
                         text = "Links",
+                        color = MaterialTheme.colors.primaryVariant,
                         style = MaterialTheme.typography.h3
                     )
                     Spacer(modifier = Modifier.height(15.dp))
@@ -101,7 +120,12 @@ fun CoinDetailScreen(
                         ExtendedFloatingActionButton(
                             text = { Text(text = "Remove from Watchlist") },
                             onClick = { removeCoinFromWatchlist() },
-                            icon = { Icon(Icons.Filled.Close, "Remove from Watchlist") },
+                            icon = {
+                                Icon(
+                                    imageVector = Icons.Filled.Close,
+                                    contentDescription = "Remove from Watchlist"
+                                )
+                            },
                             backgroundColor = Color.DarkGray
                         )
                     }

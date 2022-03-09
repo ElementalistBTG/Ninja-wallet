@@ -116,4 +116,7 @@ dependencies {
 
     //jetpack compose paging
     //implementation("androidx.paging:paging-compose:1.0.0-alpha14")
+
+    //coil dependency for image loading from url
+    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
 }
