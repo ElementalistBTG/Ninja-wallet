@@ -22,7 +22,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.elementalist.ninjawallet.common.useful.ExpandingText
-import com.elementalist.ninjawallet.common.useful.ExpandingText2
 import com.elementalist.ninjawallet.data.local.entity.CoinsEntity
 import com.elementalist.ninjawallet.presentation.coin_detail.components.LinksListItem
 
@@ -79,22 +78,26 @@ fun CoinDetailScreen(
                             text = "${coin.market_cap_rank}. ${coin.name} (${coin.symbol})",
                             color = MaterialTheme.colors.primaryVariant,
                             style = MaterialTheme.typography.h2,
-                            modifier = Modifier.weight(0.8f).align(Alignment.CenterVertically)
+                            modifier = Modifier
+                                .weight(0.8f)
+                                .align(Alignment.CenterVertically)
                         )
                         AsyncImage(
                             model = ImageRequest.Builder(LocalContext.current)
                                 .data(viewModel.state.value.coin?.image?.large)
                                 .crossfade(true)
-                                .build() ,
+                                .build(),
                             contentDescription = null,
                             contentScale = ContentScale.Inside,
-                            modifier = Modifier.clip(CircleShape).weight(0.5f)
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .weight(0.5f)
                         )
                     }
                     Spacer(modifier = Modifier.height(15.dp))
-                    ExpandingText2(
-                        text = coin.description.en,
-                        context = context)
+                    ExpandingText(
+                        text = coin.description.en
+                    )
                     Spacer(modifier = Modifier.height(15.dp))
                     Text(
                         text = "Links",
