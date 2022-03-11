@@ -32,8 +32,8 @@ fun WatchlistScreen(
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
             HeadersLine(
-                percentageSelected.value.toString(),
-                currencySelected.value.toString()
+                pricePercentageString = percentageSelected.value.toString(),
+                currency = currencySelected.value.toString()
             )
             Divider(Modifier.padding(6.dp), color = Color.LightGray)
             if (!emptyList.value) {

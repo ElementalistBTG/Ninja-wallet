@@ -62,30 +62,27 @@ fun CoinListScreen(
                         Divider(Modifier.padding(3.dp), color = Color.Green)
                     }
                 }
-
-                Box(modifier = Modifier.fillMaxSize()) {
-                    if (state.error.isNotBlank()) {//if it contains an error
-                        Text(
-                            text = state.error,
-                            color = MaterialTheme.colors.error,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(horizontal = 20.dp)
-                                .align(Alignment.Center)
-                        )
-
-                    }
-
-                    if (state.isLoading) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-                }
             }
         }
 
+        if (state.error.isNotBlank()) {//if it contains an error
+            Text(
+                text = state.error,
+                color = MaterialTheme.colors.error,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+                    .align(Alignment.Center)
+            )
+
+        }
+
+        if (state.isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
 
         //show snackbar on the very first initialisation
         SnackbarHost(

@@ -51,6 +51,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
         installSplashScreen().apply {
             this.setKeepOnScreenCondition {
                 //as long as we our loading our splash screen will show up
