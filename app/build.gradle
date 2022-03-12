@@ -10,14 +10,7 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('E:\\Android\\Keys\\ninjaWallet.jks')
-            keyAlias 'ninjakey'
-            storePassword 'rDG34qYMqkjyu65y'
-            keyPassword 'rDG34qYMqkjyu65y'
-        }
-    }
+
     compileSdk 31
 
     defaultConfig {
