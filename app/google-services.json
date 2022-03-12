@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "32460264725",
+    "project_id": "ninja-wallet-8b6c0",
+    "storage_bucket": "ninja-wallet-8b6c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32460264725:android:d9128c0b2a8ead8851051c",
+        "android_client_info": {
+          "package_name": "com.elementalist.ninjawallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32460264725-0gq82e2dvpr87b3upv7i4tbgdgrohfi6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5l2bpNZwf5ugJlenb3Q7rS1Qjg9-t02Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32460264725-0gq82e2dvpr87b3upv7i4tbgdgrohfi6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

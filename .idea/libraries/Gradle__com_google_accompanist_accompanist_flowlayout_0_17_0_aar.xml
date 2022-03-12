@@ -1,9 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.accompanist:accompanist-flowlayout:0.17.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5e0b19b89af43e4b93f8e7f6aa5ffb1c/transformed/jetified-accompanist-flowlayout-0.17.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5e0b19b89af43e4b93f8e7f6aa5ffb1c/transformed/jetified-accompanist-flowlayout-0.17.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5e0b19b89af43e4b93f8e7f6aa5ffb1c/transformed/jetified-accompanist-flowlayout-0.17.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e034e3e2419ec3dc77881b045d549a8a/transformed/jetified-accompanist-flowlayout-0.17.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c9214b3dbc967d953a5e465a0cc0c67a/transformed/jetified-accompanist-flowlayout-0.17.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c9214b3dbc967d953a5e465a0cc0c67a/transformed/jetified-accompanist-flowlayout-0.17.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c9214b3dbc967d953a5e465a0cc0c67a/transformed/jetified-accompanist-flowlayout-0.17.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.accompanist/accompanist-flowlayout/0.17.0/e2211881fceddb9537cb9612681888cca02d75c/accompanist-flowlayout-0.17.0-javadoc.jar!/" />
