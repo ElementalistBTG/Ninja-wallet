@@ -3,9 +3,10 @@
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7181202661ac923d8478b1571d98b87c/transformed/jetified-coil-compose-base-2.0.0-rc01/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2253d4504951c54e44d2e862893f7d3c/transformed/jetified-coil-compose-base-2.0.0-rc01/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6c331507867c858efd7915d863269310/transformed/jetified-coil-compose-base-2.0.0-rc01/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6c331507867c858efd7915d863269310/transformed/jetified-coil-compose-base-2.0.0-rc01/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6c331507867c858efd7915d863269310/transformed/jetified-coil-compose-base-2.0.0-rc01/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ce1c482f291c2134036ededd5b889565/transformed/jetified-coil-compose-base-2.0.0-rc01/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ce1c482f291c2134036ededd5b889565/transformed/jetified-coil-compose-base-2.0.0-rc01/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ce1c482f291c2134036ededd5b889565/transformed/jetified-coil-compose-base-2.0.0-rc01/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.coil-kt/coil-compose-base/2.0.0-rc01/7836f3b6c76029d76c72b9e4fb2945515d4ace89/coil-compose-base-2.0.0-rc01-javadoc.jar!/" />

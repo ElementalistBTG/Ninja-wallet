@@ -4,8 +4,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c1414e8fe476da894d00d0e98ba3cbce/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9b78be4bde3f3a090804eb80c1e3fb58/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/20b911349ac97483a7b596526654b432/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/20b911349ac97483a7b596526654b432/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/20b911349ac97483a7b596526654b432/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e3ff42c5651fb54a1ae95f410981ed47/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e3ff42c5651fb54a1ae95f410981ed47/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e3ff42c5651fb54a1ae95f410981ed47/transformed/jetified-accompanist-insets-ui-0.24.3-alpha/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.accompanist/accompanist-insets-ui/0.24.3-alpha/38c55ab09bb72749b39bd839fef913ebc2fd776/accompanist-insets-ui-0.24.3-alpha-javadoc.jar!/" />
