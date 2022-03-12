@@ -26,3 +26,6 @@ Libraries used:
 - SharedPreferences are also used for the settings parameters
 - Splash screen (Android 12)
 - Firebase analytics, crashlytics and performance for monitoring
+- Coil for image loading
+
+The app is also configured for building-deploying using Bitrise
