@@ -13,7 +13,7 @@ There is also a search function for quickly locating your favorite coin.
 For each coin there are more informations and links provided by Coingecko API.
 Last, you can add coins to your favorite list to be able to easily check their prices.
 
-This app has been made for demonstration reasons. It is also published on both Play Store (Google) and AppGalery (Huawei).
+This app has been made for demonstration reasons. It is also published on both Play Store (Google) and AppGallery (Huawei).
 
 Implementation details:
 This app uses the MVVM pattern with CLEAN architecture. It is fully developed on jetpack compose.
