@@ -75,7 +75,7 @@ fun ExpandingText(
                     tagMatch
                 )
             }
-            pop()
+            pop() //don't forget to add this line after a pushStringAnnotation
             previousMatchStart = matchEnd
         }
         //append the rest of the string
