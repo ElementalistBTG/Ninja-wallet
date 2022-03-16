@@ -14,9 +14,8 @@ For each coin there are more informations and links provided by Coingecko API.
 Last, you can add coins to your favorite list to be able to easily check their prices.
 
 This app has been made for demonstration reasons. It is also published on both Play Store (Google) and AppGallery (Huawei).
-
-[!get on play store](https://github.com/ElementalistBTG/Ninja-wallet/app/images/PlayStore.png "Download from play store")(https://play.google.com/store/apps/details?id=com.elementalist.ninjawallet)
-[!get on app gallery](https://github.com/ElementalistBTG/Ninja-wallet/app/images/AppGallery.png "Download from app gallery")()
+<a href="https://play.google.com/store/apps/details?id=com.elementalist.ninjawallet"><img src="app/images/PlayStore.png" width="200" ></a>
+<a href="https://play.google.com/store/apps/details?id=com.elementalist.ninjawallet"><img src="app/images/AppGallery.png" width="200" ></a>
 
 Implementation details:
 This app uses the MVVM pattern with CLEAN architecture. It is fully developed on jetpack compose.
