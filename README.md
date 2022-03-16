@@ -32,5 +32,5 @@ Libraries used:
 
 The app is also configured for building-deploying using Bitrise
 
-You can also check out my article on [medium](https://medium.com/@elementalistbtg/expandable-and-clickable-text-with-annotated-string-in-jetpack-compose-a49481a55477)
+You can also check out my article on [medium](https://medium.com/@elementalistbtg/expandable-and-clickable-text-with-annotated-string-in-jetpack-compose-a49481a55477) about annotated Strings in jetpack compose and how i used them in my app
 
