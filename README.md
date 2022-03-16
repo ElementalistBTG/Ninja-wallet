@@ -15,6 +15,9 @@ Last, you can add coins to your favorite list to be able to easily check their p
 
 This app has been made for demonstration reasons. It is also published on both Play Store (Google) and AppGallery (Huawei).
 
+[!get on play store](https://github.com/ElementalistBTG/Ninja-wallet/app/images/PlayStore.png "Download from play store")(https://play.google.com/store/apps/details?id=com.elementalist.ninjawallet)
+[!get on app gallery](https://github.com/ElementalistBTG/Ninja-wallet/app/images/AppGallery.png "Download from app gallery")()
+
 Implementation details:
 This app uses the MVVM pattern with CLEAN architecture. It is fully developed on jetpack compose.
 Libraries used:
@@ -29,3 +32,6 @@ Libraries used:
 - Coil for image loading
 
 The app is also configured for building-deploying using Bitrise
+
+You can also check out my article on [medium](https://medium.com/@elementalistbtg/expandable-and-clickable-text-with-annotated-string-in-jetpack-compose-a49481a55477)
+
